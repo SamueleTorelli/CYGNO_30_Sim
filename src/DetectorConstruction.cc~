@@ -1,0 +1,157 @@
+//
+// ********************************************************************
+// * License and Disclaimer                                           *
+// *                                                                  *
+// * The  Geant4 software  is  copyright of the Copyright Holders  of *
+// * the Geant4 Collaboration.  It is provided  under  the terms  and *
+// * conditions of the Geant4 Software License,  included in the file *
+// * LICENSE and available at  http://cern.ch/geant4/license .  These *
+// * include a list of copyright holders.                             *
+// *                                                                  *
+// * Neither the authors of this software system, nor their employing *
+// * institutes,nor the agencies providing financial support for this *
+// * work  make  any representation or  warranty, express or implied, *
+// * regarding  this  software system or assume any liability for its *
+// * use.  Please see the license in the file  LICENSE  and URL above *
+// * for the full disclaimer and the limitation of liability.         *
+// *                                                                  *
+// * This  code  implementation is the result of  the  scientific and *
+// * technical work of the GEANT4 collaboration.                      *
+// * By using,  copying,  modifying or  distributing the software (or *
+// * any work based  on the software)  you  agree  to acknowledge its *
+// * use  in  resulting  scientific  publications,  and indicate your *
+// * acceptance of all terms of the Geant4 Software license.          *
+// ********************************************************************
+//
+/// \file DetectorConstruction.cc
+/// \brief Implementation of the DetectorConstruction class
+//
+// 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+#include "DetectorConstruction.hh"
+
+#include "G4NistManager.hh"
+#include "G4Box.hh"
+#include "G4LogicalVolume.hh"
+#include "G4PVPlacement.hh"
+#include "G4SystemOfUnits.hh"
+#include "G4PVReplica.hh"
+#include "G4VPVParameterisation.hh"
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+DetectorConstruction::DetectorConstruction():G4VUserDetectorConstruction()
+{
+  fWorldSize_x = 40*m;
+  fWorldSize_y = 1*m;
+  fWorldSize_z = 3*m;
+
+  fCathodeSize_x = 50*cm;
+  fCathodeSize_y = 80*cm;
+  fCathodeSize_z = 0.0009*mm;
+
+  fGEMSize_x = 50*cm;
+  fGEMSize_y = 80*cm;
+  fGEMSize_z = 0.06*mm;
+  
+  
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+DetectorConstruction::~DetectorConstruction()
+{}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+G4VPhysicalVolume* DetectorConstruction::Construct()
+{
+  //
+  // define a material
+  //
+
+  G4NistManager* nist = G4NistManager::Instance();
+  
+  G4Material* Air =
+  nist->FindOrBuildMaterial("G4_AIR"); 
+
+  G4Material* Alluminium =
+  nist->FindOrBuildMaterial("G4_Al");
+
+  G4Material* Copper =
+  nist->FindOrBuildMaterial("G4_Cu");
+  
+  //     
+  // World
+  //
+  
+  G4Box*  
+  solidWorld = new G4Box("World",                          //its name
+                   fWorldSize_x/2,fWorldSize_y/2,fWorldSize_z/2);//its size
+                   
+  G4LogicalVolume*                         
+  logicWorld = new G4LogicalVolume(solidWorld,             //its solid
+                                   Air,                    //its material
+                                   "World");               //its name
+  G4VPhysicalVolume*                                   
+  physiWorld = new G4PVPlacement(0,                      //no rotation
+                                 G4ThreeVector(),        //at (0,0,0)
+                                 logicWorld,             //its logical volume
+                                 "World",                //its name
+                                 0,                      //its mother  volume
+                                 false,                  //no boolean operation
+                                 0);                     //copy number
+
+
+  //
+  //Cathode
+  //
+  
+  G4Box*
+    solidCathode = new G4Box("Cathode",
+			fCathodeSize_x/2,fCathodeSize_y/2,fCathodeSize_z);
+  
+  G4LogicalVolume*
+    logicCathode = new G4LogicalVolume(solidCathode,
+				       Alluminium,
+				       "Cathode");
+
+  G4double cathodeSpace = 0.5*cm;
+   
+  for(G4int i=-37;i<38;i++){
+  
+  G4VPhysicalVolume*
+    physicCathode = new G4PVPlacement(0,
+				      G4ThreeVector(i*(fCathodeSize_x+cathodeSpace),0,0),
+				      logicCathode,
+				      "Cathode",
+				      logicWorld,
+				      false,
+				      i);
+  }
+  //
+  //GEMs
+  //
+  
+
+  G4Box*
+    solidGEM = new G4Box("GEM",
+			fGEMSize_x/2,fGEMSize_y/2,fGEMSize_z);
+
+  G4LogicalVolume*
+    logicGEM = new G4LogicalVolume(solidGEM,
+				   Copper,
+				   "Cathode");
+  
+  
+  
+  //
+  //always return the physical World
+  //  
+
+  return physiWorld;
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
