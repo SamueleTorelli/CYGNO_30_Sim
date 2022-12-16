@@ -197,7 +197,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 				       "GEMs",
 				       logicWorld,
 				       false,
-				       (37+i)*10+abs(j+1));
+				       (37+i)*10+abs(j+1)
+				       );
+
+      
       std::cout << "North: " << (37+i)*10+abs(j+1) << std::endl;
     }//chiudo for su j
     
@@ -211,7 +214,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 				       "GEMs",
 				       logicWorld,
 				       false,
-				       -1*(37+i)*10-abs(j-1));
+				       -1*(37+i)*10-abs(j-1)
+				       );
+
       std::cout << "South: " << -1*(37+i)*10-abs(j-1) << std::endl; 
     }//chiudo for su j
     
@@ -264,7 +269,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					"Rings",
 					logicWorld,
 					false,
-					(37+i)*100+j);
+					(37+i)*100+j
+					);
       
     }
 
@@ -279,7 +285,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					"Rings",
 					logicWorld,
 					false,
-					-1*((37+i)*100+j));
+					-1*((37+i)*100+j)
+					);
       
     }
   }
@@ -329,7 +336,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 				     "Vessel",
 				     logicWorld,
 				     false,
-				     0);
+				     0
+				     );
   
   
   //

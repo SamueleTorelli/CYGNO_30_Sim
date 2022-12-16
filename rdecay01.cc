@@ -37,6 +37,7 @@
 #include "G4UImanager.hh"
 #include "G4SteppingVerbose.hh"
 #include "Randomize.hh"
+#include "G4EmStandardPhysics.hh"
 
 #include "DetectorConstruction.hh"
 #include "PhysicsList.hh"
@@ -68,7 +69,9 @@ int main(int argc,char** argv) {
 
   //set mandatory initialization classes
   //
+
   runManager->SetUserInitialization(new DetectorConstruction);
+
   runManager->SetUserInitialization(new PhysicsList);
 
   runManager->SetUserInitialization(new ActionInitialization);

@@ -65,6 +65,8 @@ PhysicsList::PhysicsList(): G4VUserPhysicsList()
   deex->SetIsomerProduction(true);  
   deex->SetMaxLifeTime(G4NuclideTable::GetInstance()->GetThresholdOfHalfLife()
                 /std::log(2.));
+
+    
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -112,13 +114,14 @@ void PhysicsList::ConstructProcess()
   //
   G4LossTableManager* man = G4LossTableManager::Instance();
   G4VAtomDeexcitation* deex = man->AtomDeexcitation();
+
   if (!deex) {
      ///G4EmParameters::Instance()->SetFluo(true);
-     G4EmParameters::Instance()->SetAugerCascade(ARMflag);
-     G4EmParameters::Instance()->SetDeexcitationIgnoreCut(ARMflag);    
-     deex = new G4UAtomicDeexcitation();
-     deex->InitialiseAtomicDeexcitation();
-     man->SetAtomDeexcitation(deex);
+    G4EmParameters::Instance()->SetAugerCascade(ARMflag);
+    G4EmParameters::Instance()->SetDeexcitationIgnoreCut(ARMflag);    
+    deex = new G4UAtomicDeexcitation();
+    deex->InitialiseAtomicDeexcitation();
+    man->SetAtomDeexcitation(deex);
   }
 
   // register radioactiveDecay
