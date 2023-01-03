@@ -33,6 +33,7 @@
 #include "EventAction.hh"
 #include "HistoManager.hh"
 #include "Run.hh"
+#include "PrimaryGeneratorAction.hh" 
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
@@ -41,9 +42,9 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-EventAction::EventAction()
+EventAction::EventAction(PrimaryGeneratorAction* primary)
 :G4UserEventAction(),
- fDecayChain(),fEvisTot(0.)
+ fDecayChain(),fEvisTot(0.),fPrimary(primary)
 {
   // Set default print level 
   G4RunManager::GetRunManager()->SetPrintProgress(10000);
@@ -60,6 +61,9 @@ void EventAction::BeginOfEventAction(const G4Event*)
 {
  fDecayChain = " ";
  fEvisTot = 0.;
+ 
+ fPrimary->GetParticleGun()->SetParticlePosition(fPrimary->GetPointOnDetectorElement("Cathodes"));
+ 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

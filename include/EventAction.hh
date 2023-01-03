@@ -34,6 +34,7 @@
 #define EventAction_h 1
 
 #include "G4UserEventAction.hh"
+#include "PrimaryGeneratorAction.hh"
 #include "globals.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -41,7 +42,7 @@
 class EventAction : public G4UserEventAction
 {
   public:
-    EventAction();
+    EventAction(PrimaryGeneratorAction* );
    ~EventAction();
 
   public:
@@ -52,6 +53,7 @@ class EventAction : public G4UserEventAction
     void AddEvisible(G4double val)   {fEvisTot    += val;};
     
   private:
+    PrimaryGeneratorAction* fPrimary;
     G4String        fDecayChain;                   
     G4double        fEvisTot;
 };

@@ -30,7 +30,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 #include "PrimaryGeneratorAction.hh"
-
+#include "G4LogicalVolume.hh"
 #include "G4Event.hh"
 #include "G4ParticleTable.hh"
 #include "G4IonTable.hh"
@@ -39,24 +39,34 @@
 #include "G4ParticleTable.hh"
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
+#include "G4VSolid.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-PrimaryGeneratorAction::PrimaryGeneratorAction()
- : G4VUserPrimaryGeneratorAction(),
-   fParticleGun(0)
+PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* Detector)
+  : G4VUserPrimaryGeneratorAction(),
+    fParticleGun(0),
+    fDetector(Detector)
 {
+  
   G4int n_particle = 1;
   fParticleGun  = new G4ParticleGun(n_particle);
-
+  
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4ParticleDefinition* particle = particleTable->FindParticle("geantino");
+  G4ParticleDefinition* particle = particleTable->FindParticle("geantino");  
+    
+  double randNum = G4UniformRand();
+
+  G4cout << "myTest " << fDetector->GetCathodesVolumes()->GetCopyNo() << G4endl;
+  G4cout << "myTest2 " << fDetector->GetCathodesVolumes()->GetMultiplicity() << G4endl;
+  G4cout << "myTest3 " <<  randNum << G4endl;
   
   fParticleGun->SetParticleEnergy(0*eV);
-  fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
+  fParticleGun->SetParticlePosition(GetPointOnDetectorElement("Cathodes"));
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));          
   fParticleGun->SetParticleDefinition(particle);
-  
+
+  G4cout << "here" << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -72,18 +82,75 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
 
   if (fParticleGun->GetParticleDefinition() == G4Geantino::Geantino()) {  
-    G4int Z = 27, A = 60;
+    G4int Z = 29, A = 64;
     G4double ionCharge   = 0.*eplus;
     G4double excitEnergy = 0.*keV;
     
     G4ParticleDefinition* ion
-       = G4IonTable::GetIonTable()->GetIon(Z,A,excitEnergy);
+      = G4IonTable::GetIonTable()->GetIon(Z,A,excitEnergy);
     fParticleGun->SetParticleDefinition(ion);
     fParticleGun->SetParticleCharge(ionCharge);
   }    
-
+  
   //create vertex
   //   
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
+G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
+
+  std::vector<G4String> Elements;
+    
+  if(El == "Cathodes"){
+    Elements = fDetector->GetCathodesList();
+  } else if (El == "GEMs"){
+    Elements = fDetector->GetGEMsLists();
+  } else if (El == "Rings"){
+    Elements = fDetector->GetRingsList();
+  } else{
+    Elements.push_back("0");
+  }
+
+  /*  for(int i = 0 ; i< Elements.size();i++){
+    G4cout <<"element " << i << " "  <<Elements[i] << G4endl;
+    
+    } */ 
+
+  if(Elements[0]!="0"){
+
+    G4int min = 0;
+    G4int max = Elements.size();
+    
+    G4int nEl = min + (int)(G4UniformRand() * (max - min));
+
+    G4cout<< "ElementNumber_____ " << nEl << G4endl;
+    
+    G4VPhysicalVolume* vol = fDetector->GetVolumeStored()->GetVolume(Elements[nEl]);
+    
+    G4ThreeVector PointOnSurface = vol->GetLogicalVolume()->GetSolid()->GetPointOnSurface();
+    G4ThreeVector TranslationVolume = vol->GetObjectTranslation();
+    
+    G4ThreeVector Point = PointOnSurface + TranslationVolume;
+
+    G4cout <<"PointOnSurface " << PointOnSurface << G4endl;
+    G4cout <<"TranslationVolume " << TranslationVolume << G4endl;
+    
+    return Point;
+    
+  } else {
+    
+    G4VPhysicalVolume* vol = fDetector->GetVessel();
+    
+    G4ThreeVector PointOnSurface = vol->GetLogicalVolume()->GetSolid()->GetPointOnSurface();
+    G4ThreeVector TranslationVolume = vol->GetObjectTranslation();
+    
+    G4ThreeVector Point = PointOnSurface + TranslationVolume;
+
+    return Point;
+    
+  }
+
+  
+}

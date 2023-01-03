@@ -35,7 +35,6 @@
 #include "HistoManager.hh"
 #include "Run.hh"
 #include "EventAction.hh"
-#include "TrackingMessenger.hh"
 
 #include "G4Track.hh"
 #include "G4ParticleTypes.hh"
@@ -49,11 +48,10 @@
 
 TrackingAction::TrackingAction(EventAction* EA)
 :G4UserTrackingAction(),
- fEvent(EA),fTrackMessenger(0),
+ fEvent(EA),
  fFullChain(true)
  
 {
-  fTrackMessenger = new TrackingMessenger(this);   
   
   fTimeWindow1 = fTimeWindow2 = 0.;
 }
@@ -62,7 +60,6 @@ TrackingAction::TrackingAction(EventAction* EA)
 
 TrackingAction::~TrackingAction()
 {
-  delete fTrackMessenger;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

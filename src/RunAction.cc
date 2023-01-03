@@ -34,7 +34,6 @@
 #include "Run.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "HistoManager.hh"
-
 #include "G4Run.hh"
 #include "G4UnitsTable.hh"
 #include "G4PhysicalConstants.hh"

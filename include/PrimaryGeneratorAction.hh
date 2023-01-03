@@ -36,6 +36,12 @@
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleGun.hh"
 #include "globals.hh"
+#include "DetectorConstruction.hh"
+#include "G4ThreeVector.hh"
+#include "G4String.hh"
+#include "G4LogicalVolume.hh"
+#include "G4VSolid.hh"
+
 
 class G4Event;
 
@@ -43,16 +49,20 @@ class G4Event;
 
 class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
-  public:
-    PrimaryGeneratorAction();    
-   ~PrimaryGeneratorAction();
 
-  public:
-    virtual void GeneratePrimaries(G4Event*);
-    G4ParticleGun* GetParticleGun() { return fParticleGun;} ;
-            
-  private:
-    G4ParticleGun*  fParticleGun;
+public:
+  PrimaryGeneratorAction(DetectorConstruction*);
+  ~PrimaryGeneratorAction();
+  
+public:
+  virtual void GeneratePrimaries(G4Event*);
+  G4ParticleGun* GetParticleGun() { return fParticleGun;};
+  G4ThreeVector GetPointOnDetectorElement(G4String);
+  
+private:
+  G4ParticleGun*  fParticleGun;
+  DetectorConstruction* fDetector;
+
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

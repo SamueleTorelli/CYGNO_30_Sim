@@ -45,7 +45,7 @@
 
 #include "G4UIExecutive.hh"
 #include "G4VisExecutive.hh"
-
+#include "G4PhysListFactory.hh"
 
 int main(int argc,char** argv) {
 
@@ -57,24 +57,32 @@ int main(int argc,char** argv) {
   CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
 
   //use G4SteppingVerboseWithUnits
-  G4int precision = 4;
+  G4int precision = 1;
   G4SteppingVerbose::UseBestUnit(precision);
 
   //construct the run manager
   auto runManager = G4RunManagerFactory::CreateRunManager();  
+  runManager->SetNumberOfThreads(1);
   if (argc==3) {
     G4int nThreads = G4UIcommand::ConvertToInt(argv[2]);
-    runManager->SetNumberOfThreads(nThreads);
-  }  
-
+    runManager->SetNumberOfThreads(4);
+  }
+  
+  //
   //set mandatory initialization classes
   //
 
-  runManager->SetUserInitialization(new DetectorConstruction);
+  DetectorConstruction* theDetector = new DetectorConstruction();
+  
+  runManager->SetUserInitialization(theDetector);
 
-  runManager->SetUserInitialization(new PhysicsList);
+  G4PhysListFactory factory;
+  G4VModularPhysicsList* physicsList = factory.GetReferencePhysList("FTFP_BERT_HP");
+  physicsList->SetVerboseLevel(0);
+  
+  runManager->SetUserInitialization(physicsList);
 
-  runManager->SetUserInitialization(new ActionInitialization);
+  runManager->SetUserInitialization(new ActionInitialization(theDetector));
 
   //initialize G4 kernel
   runManager->Initialize();

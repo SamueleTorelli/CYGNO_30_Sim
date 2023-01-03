@@ -15,6 +15,7 @@
 #include "G4RadioactiveDecayPhysics.hh"
 #include "G4HadronPhysicsFTFP_BERT_HP.hh"
 #include "G4ProcessManager.hh"
+#include "G4PhysListFactory.hh"
 
 PhysicsList::PhysicsList(): G4VModularPhysicsList()
 {
@@ -22,7 +23,8 @@ PhysicsList::PhysicsList(): G4VModularPhysicsList()
   RegisterPhysics(new G4EmStandardPhysics_option4());
   RegisterPhysics(new G4DecayPhysics());
   RegisterPhysics(new G4RadioactiveDecayPhysics());
-      
+
+  
   // mandatory for G4NuclideTable
   //
   G4NuclideTable::GetInstance()->SetThresholdOfHalfLife(1*ps*std::log(2.));

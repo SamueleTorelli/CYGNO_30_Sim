@@ -55,8 +55,6 @@ class TrackingAction : public G4UserTrackingAction {
     
   private:
     EventAction*        fEvent;
-    TrackingMessenger*  fTrackMessenger;
-    
     G4double fCharge, fMass;        
     G4bool   fFullChain;
 

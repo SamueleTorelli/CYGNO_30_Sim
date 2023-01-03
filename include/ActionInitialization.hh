@@ -31,19 +31,26 @@
 #define ActionInitialization_h 1
 
 #include "G4VUserActionInitialization.hh"
+#include "DetectorConstruction.hh"
 
 /// Action initialization class.
 ///
 
+
 class ActionInitialization : public G4VUserActionInitialization
 {
   public:
-    ActionInitialization();
+    ActionInitialization(DetectorConstruction* );
     virtual ~ActionInitialization();
 
     virtual void BuildForMaster() const;
     virtual void Build() const;
 
+  DetectorConstruction* GetDetector() {return fDetector;}
+  
+private:
+  DetectorConstruction* fDetector;
+  
 };
 
 #endif

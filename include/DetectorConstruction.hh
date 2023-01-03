@@ -34,9 +34,13 @@
 #define DetectorConstruction_h 1
 
 #include "G4VUserDetectorConstruction.hh"
+#include "G4VPhysicalVolume.hh"
+#include "G4PhysicalVolumeStore.hh"
 #include "globals.hh"
 
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+class G4VPhysicalVolume;
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -52,19 +56,38 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4double GetWorldSizeY() {return fWorldSize_y;};
   G4double GetWorldSizeZ() {return fWorldSize_z;}; 
 
+  G4VPhysicalVolume* GetCathodesVolumes() {return fPhysicalCathodes;}
+  G4VPhysicalVolume* GetGEMVolumesPlus() {return fPhysicGEMsPlus;}
+  G4VPhysicalVolume* GetGEMVolumesMinus() {return fPhysicGEMsMinus;}
+  G4VPhysicalVolume* GetRingsVolumesPlus() {return fPhysicRingsPlus;}
+  G4VPhysicalVolume* GetRingsVolumesMinus() {return fPhysicRingsMinus;}
+  G4VPhysicalVolume* GetVessel() {return fPhysicVessel;} 
+
+  G4PhysicalVolumeStore* GetVolumeStored() {return fPhysVolStore;}
+
+  std::vector<G4String> GetCathodesList() {return fListCathodes;}
+  std::vector<G4String> GetGEMsLists() {return fListGEMs;}
+  std::vector<G4String> GetRingsList() {return fListRings;}
+  
+  
   private:
   
   G4double fWorldSize_x;
   G4double fWorldSize_y;
   G4double fWorldSize_z;
-  
-  G4double fCathodeSize_x;
-  G4double fCathodeSize_y;
-  G4double fCathodeSize_z;
 
-  G4double fGEMSize_x;
-  G4double fGEMSize_y;
-  G4double fGEMSize_z;
+  std::vector<G4String> fListCathodes;
+  std::vector<G4String> fListGEMs;
+  std::vector<G4String> fListRings;
+  
+  G4VPhysicalVolume* fPhysicalCathodes;
+  G4VPhysicalVolume* fPhysicGEMsPlus;
+  G4VPhysicalVolume* fPhysicGEMsMinus;
+  G4VPhysicalVolume* fPhysicRingsPlus;
+  G4VPhysicalVolume* fPhysicRingsMinus;
+  G4VPhysicalVolume* fPhysicVessel;
+  G4PhysicalVolumeStore* fPhysVolStore;
+
   
 };
 
