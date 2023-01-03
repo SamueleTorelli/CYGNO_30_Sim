@@ -62,7 +62,9 @@ int main(int argc,char** argv) {
 
   //construct the run manager
   auto runManager = G4RunManagerFactory::CreateRunManager();  
+
   runManager->SetNumberOfThreads(1);
+
   if (argc==3) {
     G4int nThreads = G4UIcommand::ConvertToInt(argv[2]);
     runManager->SetNumberOfThreads(4);
@@ -94,20 +96,20 @@ int main(int argc,char** argv) {
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
 
   if (ui)  {
-   //interactive mode
-   visManager = new G4VisExecutive;
-   visManager->Initialize();
-   UImanager->ApplyCommand("/control/execute vis.mac");
-   ui->SessionStart();
-   delete ui;
+    //interactive mode
+    visManager = new G4VisExecutive;
+    visManager->Initialize();
+    UImanager->ApplyCommand("/control/execute vis.mac");
+    ui->SessionStart();
+    delete ui;
   }
   else  {
-   //batch mode
-   G4String command = "/control/execute ";
-   G4String fileName = argv[1];
-   UImanager->ApplyCommand(command+fileName);
+    //batch mode
+    G4String command = "/control/execute ";
+    G4String fileName = argv[1];
+    UImanager->ApplyCommand(command+fileName);
   }
-
+  
   //job termination
   delete visManager;
   delete runManager;

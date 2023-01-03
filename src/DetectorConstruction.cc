@@ -47,8 +47,8 @@
 
 DetectorConstruction::DetectorConstruction():G4VUserDetectorConstruction()
 {
-  fWorldSize_x = 40*m;
-  fWorldSize_y = 1*m;
+  fWorldSize_x = 14*m;
+  fWorldSize_y = 3*m;
   fWorldSize_z = 3*m;  
 
   fListCathodes.clear();
@@ -142,22 +142,23 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
   G4double detectorSpace = 1.*cm;
      
-  for(G4int i=-37;i<38;i++){
-    
-    
-    fPhysicalCathodes = new G4PVPlacement(0,
-					  G4ThreeVector(i*(CathodeSize_x+detectorSpace),0,0),
-					  logicCathode,
-					  "Cathode_"+std::to_string(i+37),
-					  logicWorld,
-					  false,
-					  i+37);
-    
-    fListCathodes.push_back("Cathode_"+std::to_string(i+37));
-    
-    std::cout << "Cathode index: " << "Cathode_"+std::to_string(i+37) << std::endl;
+  for(G4int i=-12;i<13;i++){
+    for(G4int j=-1;j<2;j++){
+      
+      fPhysicalCathodes = new G4PVPlacement(0,
+					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),0),
+					    logicCathode,
+					    "Cathode_"+std::to_string( (j+2)*100+(i+12) ),
+					    logicWorld,
+					    false,
+					    i+37);
+      
+      fListCathodes.push_back("Cathode_"+std::to_string( (j+2)*100+(i+12)) );
+      
+      std::cout << "Cathode index: " << "Cathode_"+std::to_string( (j+2)*100+(i+12) ) << "\n";
+      
+    }
   }
-  
   
   //
   //GEMs
@@ -186,24 +187,29 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double GEMGap = 0.2*cm;
   G4double GEMDistanceFromCathode = 50*cm;
 
-  for(G4int i =-37;i<38;i++){
+  for(G4int i =-12;i<13;i++){
 
     //GEMs on positive side of z axis
 
     for(G4int j=0;j<3;j++){
       
-      fPhysicGEMsPlus = new G4PVPlacement(0,
-					  G4ThreeVector(i*(CathodeSize_x+detectorSpace),0,GEMDistanceFromCathode+j*GEMGap),
-					  logicGEM,
-					  "GEM_"+std::to_string((37+i)*10+abs(j+1)),
-					  logicWorld,
-					  false,
-					  (37+i)*10+abs(j+1)
-					  );
+      for(G4int k=-1;k<2;k++){
+	
+	fPhysicGEMsPlus = new G4PVPlacement(0,
+					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),GEMDistanceFromCathode+j*GEMGap),
+					    logicGEM,
+					    "GEM_"+std::to_string((37+i)*10+abs(j+1)),
+					    logicWorld,
+					    false,
+					    (i+13)*100+j*10+k+1
+					    );
+	
+	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+1));
+	
+	std::cout << "North GEM: " << (i+13)*100+j*10+k+1 << "\n";
+
+      }//chiudo for su k
       
-      fListGEMs.push_back("GEM_"+std::to_string((37+i)*10+abs(j+1)));
-      
-      std::cout << "North: " << (37+i)*10+abs(j+1) << std::endl;
     }//chiudo for su j
 
 
@@ -212,20 +218,24 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     for(G4int j=0;j>-3;j--){
       
-      fPhysicGEMsMinus = new G4PVPlacement(0,
-					   G4ThreeVector(i*(CathodeSize_x+detectorSpace),0,-1*GEMDistanceFromCathode+j*GEMGap),
-					   logicGEM,
-					   "GEM_"+std::to_string(-1*(37+i)*10-abs(j-1) ),
-					   logicWorld,
-					   false,
-					   -1*(37+i)*10-abs(j-1)
-					   );
-      
-      fListGEMs.push_back("GEM_"+std::to_string(-1*(37+i)*10-abs(j-1)));
-      
-      std::cout << "South: " << -1*(37+i)*10-abs(j-1) << std::endl; 
-    }//chiudo for su j
-    
+      for(G4int k=-1;k<2;k++){
+	
+	fPhysicGEMsMinus = new G4PVPlacement(0,
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*GEMDistanceFromCathode+j*GEMGap),
+					     logicGEM,
+					     "GEM_"+std::to_string(-1*(37+i)*10-abs(j-1) ),
+					     logicWorld,
+					     false,
+					     (i+13)*100+j*10+k+4
+					     );
+	
+	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+4));
+	
+	std::cout << "South GEM: " << (i+13)*100+j*10+k+4 << "\n"; 
+      }//chiudo for su j
+
+    }//chiudo for su k
+
   }//chiudo for su i
 
 
@@ -254,7 +264,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4VSolid* solidRing =
     new G4SubtractionSolid("Ring",outerShapeRing,innerShapeRing);
-
+  
   G4LogicalVolume*
     logicRing = new G4LogicalVolume(solidRing,
 				   Copper,
@@ -262,39 +272,47 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   logicRing->SetVisAttributes(RingsVisAttributes);
 
-  for(G4int i=-37;i<38;i++){
+  for(G4int i=-12;i<13;i++){
 
     for(G4int j=0;j<NRings;j++){
 
       //Rings on positive side of z axis
-      
-      fPhysicRingsPlus = new G4PVPlacement(0,
-					   G4ThreeVector(i*(CathodeSize_x+detectorSpace),0,(j+1)*ringspacing+0.5*Ring_z+j*Ring_z),
-					   logicRing,
-					   "Ring_"+std::to_string((37+i)*100+j),
-					   logicWorld,
-					   false,
-					   (37+i)*100+j
-					   );
+      for(G4int k=-1;k<2;k++){
+	fPhysicRingsPlus = new G4PVPlacement(0,
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),(j+1)*ringspacing+0.5*Ring_z+j*Ring_z),
+					     logicRing,
+					     "Ring_"+std::to_string((37+i)*100+j),
+					     logicWorld,
+					     false,
+					     (i+13)*1000+(j+10)*10+k+1
+					     );
+	
+	fListRings.push_back("Ring_"+std::to_string( (i+13)*1000+(j+10)*10+k+1) );
 
-      fListRings.push_back("Ring_"+std::to_string((37+i)*100+j));
-    }
+	std::cout << "Nord Rings: " << (i+13)*1000+(j+10)*10+k+1 << "\n";
+	
+      }//chiudo for k 
+    }//chiudo for j
     
     //Rings on positive side of z axis
     
     for(G4int j=0;j<NRings;j++){
-       
-      fPhysicRingsMinus = new G4PVPlacement(0,
-					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),0,-1*((j+1)*ringspacing+0.5*Ring_z+j*Ring_z)),
-					    logicRing,
-					    "Ring_"+std::to_string(-1*((37+i)*100+j)),
-					    logicWorld,
-					    false,
-					    -1*((37+i)*100+j)
-					    );
+      for(G4int k=-1;k<2;k++){ 
+	fPhysicRingsMinus = new G4PVPlacement(0,
+					      G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*((j+1)*ringspacing+0.5*Ring_z+j*Ring_z)),
+					      logicRing,
+					      "Ring_"+std::to_string(-1*((37+i)*100+j)),
+					      logicWorld,
+					      false,
+					      (i+13)*1000+(j+10)*10+k+4
+					      );
       
-      fListRings.push_back("Ring_"+std::to_string(-1*((37+i)*100+j)));
-    }
+	fListRings.push_back("Ring_"+std::to_string( (i+13)*1000+(j+10)*10+k+4) );
+	
+	std::cout << "South Rings: " << (i+13)*1000+(j+10)*10+k+4 << "\n"; 
+
+      }//chiudo for k
+    }//chiudo for j
   }
   
   
@@ -304,9 +322,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4double Vesselwidth = 1*cm;
 
-  G4double VesselSize_x_outer = (CathodeSize_x/2 + 37*(+CathodeSize_x + detectorSpace) + 2*cm);
-  G4double VesselSize_y_outer = 84*cm/2;
-  G4double VesselSize_z_outer = 104*cm/2;
+  G4double VesselSize_x_outer = (CathodeSize_x/2 + 12*(+CathodeSize_x + detectorSpace) + 2*Vesselwidth);
+  G4double VesselSize_y_outer = (CathodeSize_y/2 + (+CathodeSize_y + detectorSpace) + 2*Vesselwidth);
+  G4double VesselSize_z_outer = (GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z+ 2*Vesselwidth);
 
   G4double VesselSize_x_inner = VesselSize_x_outer-Vesselwidth;
   G4double VesselSize_y_inner = VesselSize_y_outer-Vesselwidth;
@@ -341,7 +359,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 				    logicVessel,
 				    "Vessel",
 				    logicWorld,
-				    false,
+				    true,
 				    0
 				    );
   
