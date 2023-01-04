@@ -62,7 +62,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* Detector)
   G4cout << "myTest3 " <<  randNum << G4endl;
   
   fParticleGun->SetParticleEnergy(0*eV);
-  fParticleGun->SetParticlePosition(GetPointOnDetectorElement("Cathodes"));
+  //fParticleGun->SetParticlePosition(GetPointOnDetectorElement("Cathodes"));
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));          
   fParticleGun->SetParticleDefinition(particle);
 
@@ -109,8 +109,12 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
     Elements = fDetector->GetGEMsLists();
   } else if (El == "Rings"){
     Elements = fDetector->GetRingsList();
-  } else{
+  } else if (El == "Vessel"){
     Elements.push_back("0");
+  } else if (El == "Lens"){
+    Elements = fDetector->GetLensList();
+  } else if (El == "Sensors"){
+    Elements = fDetector->GetSensorsList();
   }
 
   /*  for(int i = 0 ; i< Elements.size();i++){
@@ -126,14 +130,16 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
     G4int nEl = min + (int)(G4UniformRand() * (max - min));
 
     G4cout<< "ElementNumber_____ " << nEl << G4endl;
+    G4cout<< "Element " << Elements[nEl] << G4endl;
     
     G4VPhysicalVolume* vol = fDetector->GetVolumeStored()->GetVolume(Elements[nEl]);
     
     G4ThreeVector PointOnSurface = vol->GetLogicalVolume()->GetSolid()->GetPointOnSurface();
-    G4ThreeVector TranslationVolume = vol->GetObjectTranslation();
-    
-    G4ThreeVector Point = PointOnSurface + TranslationVolume;
 
+    G4ThreeVector TranslationVolume = vol->GetObjectTranslation();
+
+    G4ThreeVector Point = PointOnSurface + TranslationVolume;
+    
     G4cout <<"PointOnSurface " << PointOnSurface << G4endl;
     G4cout <<"TranslationVolume " << TranslationVolume << G4endl;
     

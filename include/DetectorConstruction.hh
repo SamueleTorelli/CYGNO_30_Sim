@@ -68,7 +68,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   std::vector<G4String> GetCathodesList() {return fListCathodes;}
   std::vector<G4String> GetGEMsLists() {return fListGEMs;}
   std::vector<G4String> GetRingsList() {return fListRings;}
-  
+  std::vector<G4String> GetLensList() {return fListLens;}
+  std::vector<G4String> GetSensorsList() {return fListSensors;}
   
   private:
   
@@ -79,6 +80,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   std::vector<G4String> fListCathodes;
   std::vector<G4String> fListGEMs;
   std::vector<G4String> fListRings;
+  std::vector<G4String> fListLens;
+  std::vector<G4String> fListSensors;
   
   G4VPhysicalVolume* fPhysicalCathodes;
   G4VPhysicalVolume* fPhysicGEMsPlus;
@@ -86,6 +89,12 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* fPhysicRingsPlus;
   G4VPhysicalVolume* fPhysicRingsMinus;
   G4VPhysicalVolume* fPhysicVessel;
+  G4VPhysicalVolume* fPhysicLensPlus;
+  G4VPhysicalVolume* fPhysicLensMinus;
+  G4VPhysicalVolume* fPhysicSensorsPlus;
+  G4VPhysicalVolume* fPhysicSensorsMinus;
+
+
   G4PhysicalVolumeStore* fPhysVolStore;
 
   

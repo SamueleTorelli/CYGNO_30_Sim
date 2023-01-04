@@ -42,6 +42,7 @@
 #include "G4VisAttributes.hh"
 #include "G4SubtractionSolid.hh"
 #include "G4PhysicalVolumeStore.hh"
+#include "G4Tubs.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -53,6 +54,9 @@ DetectorConstruction::DetectorConstruction():G4VUserDetectorConstruction()
 
   fListCathodes.clear();
   fListGEMs.clear();
+  fListRings.clear();
+  fListLens.clear();
+  fListSensors.clear();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -71,14 +75,25 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4NistManager* nist = G4NistManager::Instance();
   
   G4Material* Air =
-  nist->FindOrBuildMaterial("G4_AIR"); 
+    nist->FindOrBuildMaterial("G4_AIR"); 
 
   G4Material* Alluminium =
-  nist->FindOrBuildMaterial("G4_Al");
+    nist->FindOrBuildMaterial("G4_Al");
 
   G4Material* Copper =
-  nist->FindOrBuildMaterial("G4_Cu");
+    nist->FindOrBuildMaterial("G4_Cu");
 
+  //
+  //defining Glass
+  //
+
+  G4double GlassDensity = 2.65*g/cm3;
+  
+  G4Material* Glass = new G4Material("Silicon Dioxide", GlassDensity, 2);
+
+  Glass->AddElement(nist->FindOrBuildElement("Si"), 1);
+  Glass->AddElement(nist->FindOrBuildElement("O"), 2);
+  
   //
   //defining PMMA
   //
@@ -90,9 +105,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   elements.push_back("H");     natoms.push_back(8);
   elements.push_back("O");     natoms.push_back(2);
 
-  G4double density = 1.190*g/cm3;
+  G4double PMMADensity = 1.190*g/cm3;
 
-  G4Material* PMMA = nist->ConstructNewMaterial("PMMA", elements, natoms, density);
+  G4Material* PMMA = nist->ConstructNewMaterial("PMMA", elements, natoms, PMMADensity);
+
+  //
+  //defining sensor material
+  //
+
+  G4Material* Silicon = nist->FindOrBuildMaterial("G4_Si");    
   
   //     
   // World
@@ -278,6 +299,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
       //Rings on positive side of z axis
       for(G4int k=-1;k<2;k++){
+
 	fPhysicRingsPlus = new G4PVPlacement(0,
 					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),(j+1)*ringspacing+0.5*Ring_z+j*Ring_z),
 					     logicRing,
@@ -297,7 +319,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     //Rings on positive side of z axis
     
     for(G4int j=0;j<NRings;j++){
+      
       for(G4int k=-1;k<2;k++){ 
+
 	fPhysicRingsMinus = new G4PVPlacement(0,
 					      G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*((j+1)*ringspacing+0.5*Ring_z+j*Ring_z)),
 					      logicRing,
@@ -362,6 +386,132 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 				    true,
 				    0
 				    );
+
+  //
+  //Camera lenses
+  //
+
+  G4double LensDiameter = 1*cm;
+  G4double LensThickness = 2*mm;
+  G4double LensDistanceFromGEMs = 57.6*cm;
+  G4double VerticalLensSpacing = 38*cm;
+  
+  G4Tubs* solidLens = new G4Tubs("Lens", 0*mm, LensDiameter, LensThickness/2, 0, 360*deg);
+  
+  G4LogicalVolume*
+    logicLens = new G4LogicalVolume(solidLens,
+				    Glass,
+				    "Lens"
+				    );
+
+  
+  for(G4int i=-12;i<13;i++){
+    
+    for(G4int j=-1;j<2;j++){
+
+      for(G4float k=-0.5;k<1;k++){
+
+	fPhysicLensPlus = new G4PVPlacement(0,
+					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace)+k*VerticalLensSpacing/2, GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z + LensDistanceFromGEMs ),
+					    logicLens,
+					    "Lens_"+std::to_string((i+13)*1000+(j+1)*10+(k+0.5)),
+					    logicWorld,
+					    false,
+					    (i+13)*1000+(j+1)*10+(k+0.5)
+					    );
+
+	fListLens.push_back("Lens_"+std::to_string((i+13)*1000+(j+1)*10+(k+0.5)));
+	
+      }//chiudo for k
+      
+    }//chiudo for j
+    
+    for(G4int j=-1;j<2;j++){
+      
+      for(G4float k=-0.5;k<1;k++){
+	
+	fPhysicLensMinus = new G4PVPlacement(0,
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace)+k*VerticalLensSpacing/2, -1*(GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z + LensDistanceFromGEMs) ),
+					    logicLens,
+					    "Lens_"+std::to_string((i+13)*1000+(j+1+4)*10+(k+0.5)),
+					    logicWorld,
+					    false,
+					    (i+13)*1000+(j+1)*10+(k+0.5)
+					    );
+
+	fListLens.push_back("Lens_"+std::to_string((i+13)*1000+(j+1+4)*10+(k+0.5)));
+	
+      }//chiudo for k
+      
+    }//chiudo for j
+
+    
+  }//chiudo for i
+
+  
+  //
+  //Camera sensors
+  //
+
+  G4double SensorSize_x = 10.6*mm;
+  G4double SensorSize_y = 18.8*mm;
+  G4double SensorSize_z = 1*mm;
+  G4double SensorDistanceFromLens = 6 * cm; 
+  
+  G4Box*
+    solidSensor = new G4Box("Sensor",
+			       SensorSize_x/2,SensorSize_y/2,SensorSize_z/2);
+
+  G4LogicalVolume*
+    logicSensor = new G4LogicalVolume(solidSensor,
+				    Silicon,
+				    "Sensor"
+				    );
+
+
+  for(G4int i=-12;i<13;i++){
+    
+    for(G4int j=-1;j<2;j++){
+      
+      for(G4float k=-0.5;k<1;k++){
+	
+	fPhysicSensorsPlus = new G4PVPlacement(0,
+					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace)+k*VerticalLensSpacing/2, GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z + LensDistanceFromGEMs + SensorDistanceFromLens ),
+					    logicSensor,
+					    "Sensor_"+std::to_string((i+13)*1000+(j+1)*10+(k+0.5)),
+					    logicWorld,
+					    false,
+					    (i+13)*1000+(j+1)*10+(k+0.5)
+					    );
+
+	fListSensors.push_back("Sensor_"+std::to_string((i+13)*1000+(j+1)*10+(k+0.5)));
+	
+      }//chiudo for k
+      
+    }//chiudo for j
+    
+    for(G4int j=-1;j<2;j++){
+      
+      for(G4float k=-0.5;k<1;k++){
+	
+	fPhysicSensorsMinus = new G4PVPlacement(0,
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace)+k*VerticalLensSpacing/2, -1*(GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z + LensDistanceFromGEMs + SensorDistanceFromLens) ),
+					    logicSensor,
+					    "Sensor_"+std::to_string((i+13)*1000+(j+1+4)*10+(k+0.5)),
+					    logicWorld,
+					    false,
+					    (i+13)*1000+(j+1)*10+(k+0.5)
+					    );
+
+	fListSensors.push_back("Sensor_"+std::to_string((i+13)*1000+(j+1+4)*10+(k+0.5)));
+	
+      }//chiudo for k
+      
+    }//chiudo for j
+
+    
+  }//chiudo for i
+
   
   
   //
