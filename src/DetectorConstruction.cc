@@ -43,6 +43,7 @@
 #include "G4SubtractionSolid.hh"
 #include "G4PhysicalVolumeStore.hh"
 #include "G4Tubs.hh"
+#include "Detector.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -114,6 +115,45 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
 
   G4Material* Silicon = nist->FindOrBuildMaterial("G4_Si");    
+
+  //
+  //defining detector gas mixture
+  //
+
+  G4double aHe = 4.002602*g/mole;
+  G4Element* elHe = new G4Element("Helium","He", 2, aHe);
+  
+  G4double aC = 12.0107*g/mole;
+  G4Element* elC = new G4Element("Carbon", "C", 6, aC);
+  
+  G4double aF=18.998*g/mole;
+  G4Element* elF = new G4Element("Flourine"  ,"F" , 9., aF);
+
+  G4double He_frac = 0.6;
+  G4double CF4_frac = 0.4;
+  
+  G4double densityHe = 162.488*He_frac*g/m3;
+  G4double pressureHe = 1*He_frac*atmosphere;
+  G4double temperatureHe = 300*kelvin;
+  G4Material* He_gas = new G4Material("He_gas", densityHe, 1, kStateGas, temperatureHe, pressureHe);
+  He_gas->AddElement(elHe, 1);
+
+  //CF4_gas
+  G4double densityCF4 = 3574.736*CF4_frac*g/m3;
+  G4double pressureCF4 = 1*CF4_frac*atmosphere;
+  G4double temperatureCF4 = 300*kelvin;
+  G4Material* CF4_gas = new G4Material("CF4_gas", densityCF4, 2, kStateGas, temperatureCF4, pressureCF4);
+  CF4_gas->AddElement(elC, 1);
+  CF4_gas->AddElement(elF, 4);
+
+  //CYGNO_gas
+  G4double densityMix = He_gas->GetDensity()+CF4_gas->GetDensity();
+  G4double pressureMix = He_gas->GetPressure()+CF4_gas->GetPressure();
+  G4double temperatureMix = 300*kelvin;
+  G4Material* CYGNO_gas = new G4Material("CYGNO_gas", densityMix, 2, kStateGas, temperatureMix, pressureMix);
+  CYGNO_gas->AddMaterial(He_gas, He_gas->GetDensity()/densityMix*100*perCent);
+  CYGNO_gas->AddMaterial(CF4_gas, CF4_gas->GetDensity()/densityMix*100*perCent);
+
   
   //     
   // World
@@ -512,7 +552,62 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
   }//chiudo for i
 
+
+  //
+  //CF4 sensitive volume
+  //
+
+
+  G4Colour GasColor(0.0,0.0,1.0,0.1);
+  G4VisAttributes* GasVisAttributes = new G4VisAttributes(GasColor);
+  GasVisAttributes->SetForceSolid(true);
   
+  G4Box* solidGasVolume = new G4Box("GasVolume",CathodeSize_x/2,CathodeSize_y/2,GEMDistanceFromCathode/2);
+
+  fLogicalGasVolume = new G4LogicalVolume(solidGasVolume,
+					  CYGNO_gas,
+					  "GasVolume"
+					  );
+
+  fLogicalGasVolume->SetVisAttributes(GasVisAttributes);
+
+  G4int counter = 0;
+  
+  for(G4int i=-12;i<13;i++){  
+    for(G4int j=-1;j<2;j++){
+      
+      G4VPhysicalVolume* GasVolumePlus = new G4PVPlacement(0,
+							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),GEMDistanceFromCathode/2),
+							   fLogicalGasVolume,
+							   "GasVolume_"+std::to_string((i+13)*100+(j+1)),
+							   logicWorld,
+							   false,
+							   (i+13)*100+(j+1)
+							   );
+
+      fListDetector.push_back("GasVolume_"+std::to_string(counter));
+      counter++;
+      
+    }//chiudo for j
+  }//chiudo for i
+  
+  for(G4int i=-12;i<13;i++){ 
+    for(G4int j=-1;j<2;j++){
+      
+      G4VPhysicalVolume* GasVolumePlus = new G4PVPlacement(0,
+							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-GEMDistanceFromCathode/2),
+							   fLogicalGasVolume,
+							   "GasVolume_"+std::to_string((i+13)*100+(j+4)),
+							   logicWorld,
+							   false,
+							   (i+13)*100+(j+1)
+							   );
+      
+      fListDetector.push_back("GasVolume_"+std::to_string(counter));
+      counter++;
+     
+    }//chiudo for j
+  }//chiudo secondo for i
   
   //
   //Creating the physicalvolumestore
@@ -527,5 +622,16 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   return physiWorld;
 }
+
+
+void DetectorConstruction::ConstructSDandField()
+{
+
+  SensitiveDetector* SensDet = new SensitiveDetector("SensitiveDetector");
+  
+  fLogicalGasVolume->SetSensitiveDetector(SensDet);
+  
+}
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

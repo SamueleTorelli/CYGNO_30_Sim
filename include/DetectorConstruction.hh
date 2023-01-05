@@ -82,6 +82,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   std::vector<G4String> fListRings;
   std::vector<G4String> fListLens;
   std::vector<G4String> fListSensors;
+  std::vector<G4String> fListDetector;
   
   G4VPhysicalVolume* fPhysicalCathodes;
   G4VPhysicalVolume* fPhysicGEMsPlus;
@@ -97,6 +98,9 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
   G4PhysicalVolumeStore* fPhysVolStore;
 
+  G4LogicalVolume* fLogicalGasVolume;
+
+  virtual void ConstructSDandField();
   
 };
 

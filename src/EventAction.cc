@@ -44,7 +44,9 @@
 
 EventAction::EventAction(PrimaryGeneratorAction* primary)
 :G4UserEventAction(),
- fDecayChain(),fEvisTot(0.),fPrimary(primary)
+ fDecayChain(),
+ fEvisTot(0.),
+ fPrimary(primary)
 {
   // Set default print level 
   G4RunManager::GetRunManager()->SetPrintProgress(10000);
@@ -62,9 +64,9 @@ void EventAction::BeginOfEventAction(const G4Event*)
  fDecayChain = " ";
  fEvisTot = 0.;
  
- fPrimary->GetParticleGun()->SetParticlePosition(fPrimary->GetPointOnDetectorElement("Sensors"));
+ fPrimary->GetParticleGun()->SetParticlePosition(fPrimary->GetPointOnDetectorElement("Cathodes"));
 
- // fPrimary->GetParticleGun()->GeneratePrimaryVertex(); 
+ //fPrimary->GetParticleGun()->GeneratePrimaryVertex(); 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
