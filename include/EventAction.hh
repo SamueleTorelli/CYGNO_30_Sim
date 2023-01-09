@@ -41,21 +41,23 @@
 
 class EventAction : public G4UserEventAction
 {
-  public:
-    EventAction(PrimaryGeneratorAction* );
-   ~EventAction();
-
-  public:
-    virtual void BeginOfEventAction(const G4Event*);
-    virtual void   EndOfEventAction(const G4Event*);
-    
-    void AddDecayChain(G4String val) {fDecayChain += val;};
-    void AddEvisible(G4double val)   {fEvisTot    += val;};
-    
-  private:
-    PrimaryGeneratorAction* fPrimary;
-    G4String        fDecayChain;                   
-    G4double        fEvisTot;
+public:
+  EventAction(PrimaryGeneratorAction* );
+  ~EventAction();
+  
+public:
+  virtual void BeginOfEventAction(const G4Event*);
+  virtual void   EndOfEventAction(const G4Event*);
+  
+  void AddDecayChain(G4String val) {fDecayChain += val;};
+  void AddEvisible(G4double val)   {fEvisTot    += val;};
+  void SetElement(G4String el) {fElement = el;}
+  
+private:
+  PrimaryGeneratorAction* fPrimary;
+  G4String        fDecayChain;                   
+  G4double        fEvisTot;
+  G4String        fElement="Vessel";
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

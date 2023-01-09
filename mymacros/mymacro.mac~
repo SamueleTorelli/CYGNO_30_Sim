@@ -1,0 +1,6 @@
+#/process/eLoss/StepFunction 0.001 0.01 mm
+/run/verbose 0
+/event/verbose 0
+/random/setSeeds 575841909 838392975
+/src/PrimaryGeneratorAction/SetElement "cathode"
+/run/beamOn 10

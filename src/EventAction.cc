@@ -64,7 +64,7 @@ void EventAction::BeginOfEventAction(const G4Event*)
  fDecayChain = " ";
  fEvisTot = 0.;
  
- fPrimary->GetParticleGun()->SetParticlePosition(fPrimary->GetPointOnDetectorElement("Cathodes"));
+ fPrimary->GetParticleGun()->SetParticlePosition(fPrimary->GetPointOnDetectorElement( fElement ));
 
  //fPrimary->GetParticleGun()->GeneratePrimaryVertex(); 
 }
