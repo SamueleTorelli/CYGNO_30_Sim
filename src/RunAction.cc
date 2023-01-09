@@ -79,24 +79,40 @@ void RunAction::BeginOfRunAction(const G4Run*)
   //histograms
   //
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  if ( analysisManager->IsActive() ) {
-    analysisManager->OpenFile();
-  }
+  //if ( analysisManager->IsActive() ) {
+  analysisManager->OpenFile("output.root");
+    //}
+
+  analysisManager->CreateNtuple("Hits","Hits");
+  analysisManager->CreateNtupleIColumn("EventNumber");
+  analysisManager->CreateNtupleSColumn("ParticleName");
+  analysisManager->CreateNtupleIColumn("ParticleID");
+  analysisManager->CreateNtupleIColumn("ParticleTag");
+  analysisManager->CreateNtupleIColumn("ParentID");
+  analysisManager->CreateNtupleDColumn("x_hits");
+  analysisManager->CreateNtupleDColumn("y_hits");
+  analysisManager->CreateNtupleDColumn("z_hits");
+  analysisManager->CreateNtupleDColumn("EnergyDeposit");
+  //analysisManager->CreateNtuple("TotalEnergyDeposit","TotalEnergyDeposit");
+  analysisManager->CreateNtupleIColumn("VolumeNumber");
+
+  analysisManager->FinishNtuple(0);
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void RunAction::EndOfRunAction(const G4Run*)
 {
- if (isMaster) fRun->EndOfRun();
+  if (isMaster) fRun->EndOfRun();
             
  //save histograms
  //
  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
- if ( analysisManager->IsActive() ) {
-  analysisManager->Write();
-  analysisManager->CloseFile();
- } 
+ //if ( analysisManager->IsActive() ) {
+ analysisManager->Write();
+ analysisManager->CloseFile();
+  //} 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

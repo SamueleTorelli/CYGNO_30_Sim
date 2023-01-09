@@ -102,61 +102,52 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
 
   std::vector<G4String> Elements;
-    
+  G4double width;
+  
   if(El == "Cathodes"){
     Elements = fDetector->GetCathodesList();
+    width = fDetector->GetCathodeWidth();
   } else if (El == "GEMs"){
     Elements = fDetector->GetGEMsLists();
+    width = fDetector->GetGEMWidth();
   } else if (El == "Rings"){
     Elements = fDetector->GetRingsList();
+    width = fDetector->GetRingWidth();
   } else if (El == "Vessel"){
-    Elements.push_back("0");
+    Elements.push_back("Vessel");
+    width = fDetector->GetVesselWidth();
   } else if (El == "Lens"){
     Elements = fDetector->GetLensList();
+    width = fDetector->GetLensWidth();
   } else if (El == "Sensors"){
     Elements = fDetector->GetSensorsList();
+    width = fDetector->GetSensorWidth();
   }
 
-  /*  for(int i = 0 ; i< Elements.size();i++){
-    G4cout <<"element " << i << " "  <<Elements[i] << G4endl;
-    
-    } */ 
+  
+  G4int min = 0;
+  G4int max = Elements.size();
+  
+  G4int nEl = min + (int)(G4UniformRand() * (max - min));  //select a random element in the vector
+  
+  G4cout<< "ElementNumber_____ " << nEl << G4endl;
+  G4cout<< "Element " << Elements[nEl] << G4endl;
+  
+  G4VPhysicalVolume* vol = fDetector->GetVolumeStored()->GetVolume(Elements[nEl]); // get the corresponding random physical volume
 
-  if(Elements[0]!="0"){
+  G4VSolid* solid = vol->GetLogicalVolume()->GetSolid(); // get the corresponding solid
+  
+  G4ThreeVector PointOnSurface = solid->GetPointOnSurface(); // get a random point on the surface
 
-    G4int min = 0;
-    G4int max = Elements.size();
-    
-    G4int nEl = min + (int)(G4UniformRand() * (max - min));
-
-    G4cout<< "ElementNumber_____ " << nEl << G4endl;
-    G4cout<< "Element " << Elements[nEl] << G4endl;
-    
-    G4VPhysicalVolume* vol = fDetector->GetVolumeStored()->GetVolume(Elements[nEl]);
-    
-    G4ThreeVector PointOnSurface = vol->GetLogicalVolume()->GetSolid()->GetPointOnSurface();
-
-    G4ThreeVector TranslationVolume = vol->GetObjectTranslation();
-
-    G4ThreeVector Point = PointOnSurface + TranslationVolume;
-    
-    G4cout <<"PointOnSurface " << PointOnSurface << G4endl;
-    G4cout <<"TranslationVolume " << TranslationVolume << G4endl;
-    
-    return Point;
-    
-  } else {
-    
-    G4VPhysicalVolume* vol = fDetector->GetVessel();
-    
-    G4ThreeVector PointOnSurface = vol->GetLogicalVolume()->GetSolid()->GetPointOnSurface();
-    G4ThreeVector TranslationVolume = vol->GetObjectTranslation();
-    
-    G4ThreeVector Point = PointOnSurface + TranslationVolume;
-
-    return Point;
-    
-  }
-
+  G4ThreeVector Normal = solid->SurfaceNormal(PointOnSurface); // get the normal to the surface in that point
+  
+  G4ThreeVector TranslationVolume = vol->GetObjectTranslation(); // get the translation vector of that physical volume
+  
+  G4ThreeVector Point = TranslationVolume + PointOnSurface - G4UniformRand()*width*Normal; //random point in the random volume as the translation vector + a point on the surface + a random depth 
+  
+  G4cout <<"PointOnSurface " << PointOnSurface << G4endl;
+  G4cout <<"TranslationVolume " << TranslationVolume << G4endl;
+  
+  return Point;
   
 }

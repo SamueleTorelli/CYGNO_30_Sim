@@ -413,4 +413,6 @@ CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistory.icc \
   /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistory.icc \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4CollectionNameVector.hh \
-  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSDFilter.hh
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSDFilter.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/RunAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/run/include/G4UserRunAction.hh

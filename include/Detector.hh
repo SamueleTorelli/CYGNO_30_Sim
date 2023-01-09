@@ -4,6 +4,7 @@
 #include "G4VSensitiveDetector.hh"
 #include "G4Step.hh"
 #include "G4TouchableHistory.hh"
+#include "RunAction.hh"
 
 class SensitiveDetector : public G4VSensitiveDetector
 {

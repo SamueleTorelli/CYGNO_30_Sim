@@ -82,10 +82,11 @@ void EventAction::EndOfEventAction(const G4Event* evt)
           << G4endl << G4endl;
  
  //total visible energy
- G4AnalysisManager::Instance()->FillH1(9, fEvisTot);
+ /*G4AnalysisManager::Instance()->FillH1(9, fEvisTot);
  Run* run 
   = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
  run->EvisEvent(fEvisTot);
+ */
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

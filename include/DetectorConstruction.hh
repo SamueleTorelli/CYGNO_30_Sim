@@ -63,6 +63,13 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* GetRingsVolumesMinus() {return fPhysicRingsMinus;}
   G4VPhysicalVolume* GetVessel() {return fPhysicVessel;} 
 
+  G4double GetCathodeWidth() {return fCathodeWidth;}
+  G4double GetGEMWidth() {return fGEMWidth;}
+  G4double GetRingWidth() {return fRingWidth;}
+  G4double GetLensWidth() {return fLensWidth;}
+  G4double GetSensorWidth() {return fSensorWidth;}
+  G4double GetVesselWidth() {return fVesselWidth;}
+  
   G4PhysicalVolumeStore* GetVolumeStored() {return fPhysVolStore;}
 
   std::vector<G4String> GetCathodesList() {return fListCathodes;}
@@ -77,6 +84,13 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4double fWorldSize_y;
   G4double fWorldSize_z;
 
+  G4double fCathodeWidth;
+  G4double fGEMWidth;
+  G4double fRingWidth;
+  G4double fLensWidth;
+  G4double fSensorWidth;
+  G4double fVesselWidth;
+  
   std::vector<G4String> fListCathodes;
   std::vector<G4String> fListGEMs;
   std::vector<G4String> fListRings;
@@ -94,7 +108,6 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* fPhysicLensMinus;
   G4VPhysicalVolume* fPhysicSensorsPlus;
   G4VPhysicalVolume* fPhysicSensorsMinus;
-
 
   G4PhysicalVolumeStore* fPhysVolStore;
 

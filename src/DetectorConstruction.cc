@@ -184,6 +184,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double CathodeSize_y = 80*cm;
   G4double CathodeSize_z = 0.0009*mm;
 
+  fCathodeWidth=CathodeSize_z;
   
   G4Colour AlColor(0.69, 0.77, 1.00);
   G4VisAttributes* cathodeVisAttributes = new G4VisAttributes(AlColor);
@@ -228,7 +229,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double GEMSize_x = 50*cm;
   G4double GEMSize_y = 80*cm;
   G4double GEMSize_z = 0.06*mm;
-  
+
+  fGEMWidth = GEMSize_z;
 
   G4Colour CuColor(0.45,0.25,0.0,0.9);
   G4VisAttributes* GEMVisAttributes = new G4VisAttributes(CuColor);
@@ -312,8 +314,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double Ring_z = 1*cm; //depth of the ring in Z
   G4double Ring_width = 0.2*cm; // width of the ring in x-y
   G4int NRings = 32;
-
+  
   G4double ringspacing = (GEMDistanceFromCathode-NRings*Ring_z)/(NRings+1);
+
+  fRingWidth=Ring_width;
   
   G4Box*
     outerShapeRing = new G4Box("RingOuterShape",
@@ -398,6 +402,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* VesselVisAttributes = new G4VisAttributes(VesselColor);
   VesselVisAttributes->SetForceSolid(true);
 
+  fVesselWidth=Vesselwidth;
 
   G4Box*
     outerShapeVessel = new G4Box("VesselOuterShape",
@@ -435,6 +440,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double LensThickness = 2*mm;
   G4double LensDistanceFromGEMs = 57.6*cm;
   G4double VerticalLensSpacing = 38*cm;
+
+  fLensWidth=LensThickness;
   
   G4Tubs* solidLens = new G4Tubs("Lens", 0*mm, LensDiameter, LensThickness/2, 0, 360*deg);
   
@@ -497,6 +504,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double SensorSize_y = 18.8*mm;
   G4double SensorSize_z = 1*mm;
   G4double SensorDistanceFromLens = 6 * cm; 
+
+  fSensorWidth=SensorSize_z;
   
   G4Box*
     solidSensor = new G4Box("Sensor",

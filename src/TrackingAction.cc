@@ -74,7 +74,7 @@ void TrackingAction::SetTimeWindow(G4double t1, G4double dt)
 
 void TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
-  Run* run 
+  /*Run* run 
    = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
          
   G4ParticleDefinition* particle = track->GetDefinition();
@@ -127,7 +127,8 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   //
   ////condition = (ih == 3);
   if (condition) G4RunManager::GetRunManager()->rndmSaveThisEvent();
-}
+  */
+  }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -135,7 +136,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
 {
   //keep only ions
   //
-  if (fCharge < 3. ) return;
+  /*if (fCharge < 3. ) return;
   
   Run* run 
    = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
@@ -198,7 +199,8 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
   if ((fTime_birth <= fTimeWindow2)&&(fTime_end > fTimeWindow2)) life2 = true;
   if ((fTime_end   >  fTimeWindow1)&&(fTime_end < fTimeWindow2)) decay = true;
   if (life1||life2||decay) run->CountInTimeWindow(name,life1,life2,decay);
-}
+  */
+  }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

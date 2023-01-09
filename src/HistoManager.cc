@@ -52,7 +52,7 @@ HistoManager::~HistoManager()
 void HistoManager::Book()
 {
   // Create or get analysis manager
-  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  /*G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetDefaultFileType("root");
   analysisManager->SetFileName(fFileName);
   analysisManager->SetVerboseLevel(1);
@@ -78,13 +78,13 @@ void HistoManager::Book()
   G4int nbins = 100;
   G4double vmin = 0.;
   G4double vmax = 100.;
-
+  */
   // Create all histograms as inactivated 
   // as we have not yet set nbins, vmin, vmax
-  for (G4int k=0; k<kMaxHisto; k++) {
+  /*for (G4int k=0; k<kMaxHisto; k++) {
     G4int ih = analysisManager->CreateH1(id[k], title[k], nbins, vmin, vmax);
     analysisManager->SetH1Activation(ih, false);
-  }
+    }*/
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
