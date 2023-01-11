@@ -4,6 +4,7 @@
 /random/setSeeds 575841909 838392975
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
 /detector/RadElement GEMs
-/isotope/AtomicNumber 27
-/isotope/MassNumber 60
-/run/beamOn 20000
+/isotope/AtomicNumber 90
+/isotope/MassNumber 234
+/isotope/Debug false
+/run/beamOn 10000

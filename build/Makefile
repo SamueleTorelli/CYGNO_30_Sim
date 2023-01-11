@@ -222,30 +222,6 @@ src/ActionInitialization.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/ActionInitialization.cc.s
 .PHONY : src/ActionInitialization.cc.s
 
-src/Detector.o: src/Detector.cc.o
-.PHONY : src/Detector.o
-
-# target to build an object file
-src/Detector.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/Detector.cc.o
-.PHONY : src/Detector.cc.o
-
-src/Detector.i: src/Detector.cc.i
-.PHONY : src/Detector.i
-
-# target to preprocess a source file
-src/Detector.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/Detector.cc.i
-.PHONY : src/Detector.cc.i
-
-src/Detector.s: src/Detector.cc.s
-.PHONY : src/Detector.s
-
-# target to generate assembly for a file
-src/Detector.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/Detector.cc.s
-.PHONY : src/Detector.cc.s
-
 src/DetectorConstruction.o: src/DetectorConstruction.cc.o
 .PHONY : src/DetectorConstruction.o
 
@@ -414,6 +390,30 @@ src/RunAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/RunAction.cc.s
 .PHONY : src/RunAction.cc.s
 
+src/SensitiveDetector.o: src/SensitiveDetector.cc.o
+.PHONY : src/SensitiveDetector.o
+
+# target to build an object file
+src/SensitiveDetector.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o
+.PHONY : src/SensitiveDetector.cc.o
+
+src/SensitiveDetector.i: src/SensitiveDetector.cc.i
+.PHONY : src/SensitiveDetector.i
+
+# target to preprocess a source file
+src/SensitiveDetector.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.i
+.PHONY : src/SensitiveDetector.cc.i
+
+src/SensitiveDetector.s: src/SensitiveDetector.cc.s
+.PHONY : src/SensitiveDetector.s
+
+# target to generate assembly for a file
+src/SensitiveDetector.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rdecay01.dir/build.make CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.s
+.PHONY : src/SensitiveDetector.cc.s
+
 src/TrackingAction.o: src/TrackingAction.cc.o
 .PHONY : src/TrackingAction.o
 
@@ -481,9 +481,6 @@ help:
 	@echo "... src/ActionInitialization.o"
 	@echo "... src/ActionInitialization.i"
 	@echo "... src/ActionInitialization.s"
-	@echo "... src/Detector.o"
-	@echo "... src/Detector.i"
-	@echo "... src/Detector.s"
 	@echo "... src/DetectorConstruction.o"
 	@echo "... src/DetectorConstruction.i"
 	@echo "... src/DetectorConstruction.s"
@@ -505,6 +502,9 @@ help:
 	@echo "... src/RunAction.o"
 	@echo "... src/RunAction.i"
 	@echo "... src/RunAction.s"
+	@echo "... src/SensitiveDetector.o"
+	@echo "... src/SensitiveDetector.i"
+	@echo "... src/SensitiveDetector.s"
 	@echo "... src/TrackingAction.o"
 	@echo "... src/TrackingAction.i"
 	@echo "... src/TrackingAction.s"

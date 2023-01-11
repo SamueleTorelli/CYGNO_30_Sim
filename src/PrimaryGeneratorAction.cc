@@ -57,16 +57,17 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* Detector)
     
   double randNum = G4UniformRand();
 
-  G4cout << "myTest " << fDetector->GetCathodesVolumes()->GetCopyNo() << G4endl;
-  G4cout << "myTest2 " << fDetector->GetCathodesVolumes()->GetMultiplicity() << G4endl;
-  G4cout << "myTest3 " <<  randNum << G4endl;
-  
   fParticleGun->SetParticleEnergy(0*eV);
   //fParticleGun->SetParticlePosition(GetPointOnDetectorElement("Cathodes"));
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));          
   fParticleGun->SetParticleDefinition(particle);
 
-  G4cout << "here" << G4endl;
+  fPrimaryMessenger = new G4GenericMessenger(this, "/isotope/","Radioactive isotope");
+  fPrimaryMessenger->DeclareProperty("AtomicNumber", fZIsotope, "Select atomic number");
+  fPrimaryMessenger->DeclareProperty("MassNumber", fAIsotope, "Select mass number");
+    
+  fZIsotope = 29, fAIsotope = 64;
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -82,12 +83,12 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
 
   if (fParticleGun->GetParticleDefinition() == G4Geantino::Geantino()) {  
-    G4int Z = 29, A = 64;
+    
     G4double ionCharge   = 0.*eplus;
     G4double excitEnergy = 0.*keV;
     
     G4ParticleDefinition* ion
-      = G4IonTable::GetIonTable()->GetIon(Z,A,excitEnergy);
+      = G4IonTable::GetIonTable()->GetIon(fZIsotope,fAIsotope,excitEnergy);
     fParticleGun->SetParticleDefinition(ion);
     fParticleGun->SetParticleCharge(ionCharge);
   }    
@@ -129,10 +130,7 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
   G4int max = Elements.size();
   
   G4int nEl = min + (int)(G4UniformRand() * (max - min));  //select a random element in the vector
-  
-  G4cout<< "ElementNumber_____ " << nEl << G4endl;
-  G4cout<< "Element " << Elements[nEl] << G4endl;
-  
+    
   G4VPhysicalVolume* vol = fDetector->GetVolumeStored()->GetVolume(Elements[nEl]); // get the corresponding random physical volume
 
   G4VSolid* solid = vol->GetLogicalVolume()->GetSolid(); // get the corresponding solid
@@ -144,9 +142,14 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
   G4ThreeVector TranslationVolume = vol->GetObjectTranslation(); // get the translation vector of that physical volume
   
   G4ThreeVector Point = TranslationVolume + PointOnSurface - G4UniformRand()*width*Normal; //random point in the random volume as the translation vector + a point on the surface + a random depth 
+
   
-  G4cout <<"PointOnSurface " << PointOnSurface << G4endl;
-  G4cout <<"TranslationVolume " << TranslationVolume << G4endl;
+  //G4cout<< "ElementNumber_____ " << nEl << "\n";
+  //G4cout<< "Element " << Elements[nEl] << "\n";
+  
+  //G4cout <<"PointOnSurface " << PointOnSurface << "\n";
+  //G4cout <<"TranslationVolume " << TranslationVolume << G4endl;
+
   
   return Point;
   

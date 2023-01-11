@@ -35,6 +35,9 @@
 
 #include "G4UserEventAction.hh"
 #include "PrimaryGeneratorAction.hh"
+
+#include "G4GenericMessenger.hh" 
+
 #include "globals.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -57,7 +60,9 @@ private:
   PrimaryGeneratorAction* fPrimary;
   G4String        fDecayChain;                   
   G4double        fEvisTot;
-  G4String        fElement="Vessel";
+  G4String        fElement;
+
+  G4GenericMessenger* fEventMessenger;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

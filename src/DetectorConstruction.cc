@@ -43,7 +43,7 @@
 #include "G4SubtractionSolid.hh"
 #include "G4PhysicalVolumeStore.hh"
 #include "G4Tubs.hh"
-#include "Detector.hh"
+#include "SensitiveDetector.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -202,7 +202,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   logicCathode->SetVisAttributes(cathodeVisAttributes);
     
-  G4double detectorSpace = 1.*cm;
+  G4double detectorSpace = 0.3*cm;
      
   for(G4int i=-12;i<13;i++){
     for(G4int j=-1;j<2;j++){
@@ -243,7 +243,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4LogicalVolume*
     logicGEM = new G4LogicalVolume(solidGEM,
 				   Copper,
-				   "Cathode");
+				   "GEM");
 
   logicGEM->SetVisAttributes(GEMVisAttributes);
   
@@ -261,7 +261,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	fPhysicGEMsPlus = new G4PVPlacement(0,
 					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),GEMDistanceFromCathode+j*GEMGap),
 					    logicGEM,
-					    "GEM_"+std::to_string((37+i)*10+abs(j+1)),
+					    "GEM_"+std::to_string((i+13)*100+j*10+k+1),
 					    logicWorld,
 					    false,
 					    (i+13)*100+j*10+k+1
@@ -286,13 +286,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	fPhysicGEMsMinus = new G4PVPlacement(0,
 					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*GEMDistanceFromCathode+j*GEMGap),
 					     logicGEM,
-					     "GEM_"+std::to_string(-1*(37+i)*10-abs(j-1) ),
+					     "GEM_"+std::to_string((i+13)*100+j*10+k+4 ),
 					     logicWorld,
 					     false,
 					     (i+13)*100+j*10+k+4
 					     );
 	
-	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+4));
+	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+4 ));
 	
 	std::cout << "South GEM: " << (i+13)*100+j*10+k+4 << "\n"; 
       }//chiudo for su j
@@ -347,7 +347,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	fPhysicRingsPlus = new G4PVPlacement(0,
 					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),(j+1)*ringspacing+0.5*Ring_z+j*Ring_z),
 					     logicRing,
-					     "Ring_"+std::to_string((37+i)*100+j),
+					     "Ring_"+std::to_string((i+13)*1000+(j+10)*10+k+1),
 					     logicWorld,
 					     false,
 					     (i+13)*1000+(j+10)*10+k+1
@@ -369,7 +369,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	fPhysicRingsMinus = new G4PVPlacement(0,
 					      G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*((j+1)*ringspacing+0.5*Ring_z+j*Ring_z)),
 					      logicRing,
-					      "Ring_"+std::to_string(-1*((37+i)*100+j)),
+					      "Ring_"+std::to_string((i+13)*1000+(j+10)*10+k+4),
 					      logicWorld,
 					      false,
 					      (i+13)*1000+(j+10)*10+k+4

@@ -1,4 +1,4 @@
-#include "Detector.hh"
+#include "SensitiveDetector.hh"
 #include "G4Step.hh"
 #include "G4TouchableHistory.hh"
 #include "G4Track.hh"
@@ -43,7 +43,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory* Rohist
     particleTag=-1;
   }
   
-  G4cout << "position of: " << particleName <<" " << track->GetTrackID() << "  is:  "<< posParticle << "Energy deposited:  " << EdepStep << "  in volume:  " << VolumeCopyNumber << " ParentID: "  << track->GetParentID()  << G4endl;
+  //G4cout << "position of: " << particleName <<" " << track->GetTrackID() << "  is:  "<< posParticle << "Energy deposited:  " << EdepStep << "  in volume:  " << VolumeCopyNumber << " ParentID: "  << track->GetParentID()  << G4endl;
 
   G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
   

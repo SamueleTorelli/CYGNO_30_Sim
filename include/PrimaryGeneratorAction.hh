@@ -41,7 +41,7 @@
 #include "G4String.hh"
 #include "G4LogicalVolume.hh"
 #include "G4VSolid.hh"
-
+#include "G4GenericMessenger.hh" 
 
 class G4Event;
 
@@ -62,7 +62,10 @@ public:
 private:
   G4ParticleGun*  fParticleGun;
   DetectorConstruction* fDetector;
-
+  G4int fZIsotope;
+  G4int fAIsotope;   
+  G4GenericMessenger* fPrimaryMessenger;
+  
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

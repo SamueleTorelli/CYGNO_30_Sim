@@ -23,82 +23,97 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-/// \file EventAction.cc
-/// \brief Implementation of the EventAction class
+/// \file RunAction.cc
+/// \brief Implementation of the RunAction class
 //
 // 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "EventAction.hh"
-#include "HistoManager.hh"
+#include "RunAction.hh"
 #include "Run.hh"
-#include "PrimaryGeneratorAction.hh" 
-
-#include "G4Event.hh"
-#include "G4RunManager.hh"
-#include "G4GenericMessenger.hh"
-
+#include "PrimaryGeneratorAction.hh"
+#include "HistoManager.hh"
+#include "G4Run.hh"
+#include "G4UnitsTable.hh"
+#include "G4PhysicalConstants.hh"
+#include "G4SystemOfUnits.hh"
 #include <iomanip>
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-EventAction::EventAction(PrimaryGeneratorAction* primary)
-:G4UserEventAction(),
- fDecayChain(),
- fEvisTot(0.),
- fPrimary(primary)
+RunAction::RunAction(PrimaryGeneratorAction* kin)
+:G4UserRunAction(),
+ fPrimary(kin),
+ fRun(0),
+ fHistoManager(0)
 {
-  // Set default print level 
-  G4RunManager::GetRunManager()->SetPrintProgress(10000);
-
-  fEventMessenger = new G4GenericMessenger(this, "/detector/","Element of the detector");
-  fEventMessenger->DeclareProperty("RadElement", fElement, "Select radioactive Element");
-  fElement = "Vessel";
+  fHistoManager = new HistoManager();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-EventAction::~EventAction()
-{}
-
+RunAction::~RunAction()
+{ 
+  delete fHistoManager;
+}
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::BeginOfEventAction(const G4Event*)
-{
- fDecayChain = " ";
- fEvisTot = 0.;
- 
- fPrimary->GetParticleGun()->SetParticlePosition(fPrimary->GetPointOnDetectorElement( fElement ));
+G4Run* RunAction::GenerateRun()
+{ 
+  fRun = new Run();
+  return fRun;
+}
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
- //fPrimary->GetParticleGun()->GeneratePrimaryVertex(); 
+void RunAction::BeginOfRunAction(const G4Run*)
+{ 
+  // keep run condition
+  if (fPrimary) { 
+    G4ParticleDefinition* particle 
+      = fPrimary->GetParticleGun()->GetParticleDefinition();
+    G4double energy = fPrimary->GetParticleGun()->GetParticleEnergy();
+    fRun->SetPrimary(particle, energy);
+  }    
+      
+  //histograms
+  //
+  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  //if ( analysisManager->IsActive() ) {
+  analysisManager->OpenFile("output.root");
+    //}
+
+  analysisManager->CreateNtuple("Hits","Hits");
+  analysisManager->CreateNtupleIColumn("EventNumber");
+  analysisManager->CreateNtupleSColumn("ParticleName");
+  analysisManager->CreateNtupleIColumn("ParticleID");
+  analysisManager->CreateNtupleIColumn("ParticleTag");
+  analysisManager->CreateNtupleIColumn("ParentID");
+  analysisManager->CreateNtupleDColumn("x_hits");
+  analysisManager->CreateNtupleDColumn("y_hits");
+  analysisManager->CreateNtupleDColumn("z_hits");
+  analysisManager->CreateNtupleDColumn("EnergyDeposit");
+  //analysisManager->CreateNtuple("TotalEnergyDeposit","TotalEnergyDeposit");
+  analysisManager->CreateNtupleIColumn("VolumeNumber");
+
+  analysisManager->FinishNtuple(0);
+
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::EndOfEventAction(const G4Event* evt)
+void RunAction::EndOfRunAction(const G4Run*)
 {
- G4int evtNb = evt->GetEventID(); 
- G4int printProgress = G4RunManager::GetRunManager()->GetPrintProgress();
- //printing survey
+  if (isMaster) fRun->EndOfRun();
+            
+ //save histograms
  //
-
- if(evtNb%1000==0){
-   G4cout << evtNb << G4endl;
- }
- 
- if (evtNb%printProgress == 0) 
-   G4cout << "    End of event. Decay chain:" << fDecayChain 
-          << G4endl << G4endl;
- 
- //total visible energy
- /*G4AnalysisManager::Instance()->FillH1(9, fEvisTot);
- Run* run 
-  = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
- run->EvisEvent(fEvisTot);
- */
+ G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+ //if ( analysisManager->IsActive() ) {
+ analysisManager->Write();
+ analysisManager->CloseFile();
+  //} 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-

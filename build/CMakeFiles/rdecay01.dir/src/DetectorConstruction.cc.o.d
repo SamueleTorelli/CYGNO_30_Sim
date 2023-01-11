@@ -360,7 +360,7 @@ CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/geometry/solids/Boolean/include/G4BooleanSolid.icc \
   /Users/samueletorelli/Documents/geant4/source/geometry/solids/CSG/include/G4Tubs.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/solids/CSG/include/G4Tubs.icc \
-  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/Detector.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/SensitiveDetector.hh \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSensitiveDetector.hh \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHit.hh \
   /Users/samueletorelli/Documents/geant4/source/track/include/G4Step.hh \

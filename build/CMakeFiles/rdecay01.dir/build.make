@@ -97,24 +97,10 @@ CMakeFiles/rdecay01.dir/src/ActionInitialization.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rdecay01.dir/src/ActionInitialization.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/ActionInitialization.cc -o CMakeFiles/rdecay01.dir/src/ActionInitialization.cc.s
 
-CMakeFiles/rdecay01.dir/src/Detector.cc.o: CMakeFiles/rdecay01.dir/flags.make
-CMakeFiles/rdecay01.dir/src/Detector.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/Detector.cc
-CMakeFiles/rdecay01.dir/src/Detector.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/rdecay01.dir/src/Detector.cc.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/Detector.cc.o -MF CMakeFiles/rdecay01.dir/src/Detector.cc.o.d -o CMakeFiles/rdecay01.dir/src/Detector.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/Detector.cc
-
-CMakeFiles/rdecay01.dir/src/Detector.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rdecay01.dir/src/Detector.cc.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/Detector.cc > CMakeFiles/rdecay01.dir/src/Detector.cc.i
-
-CMakeFiles/rdecay01.dir/src/Detector.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rdecay01.dir/src/Detector.cc.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/Detector.cc -o CMakeFiles/rdecay01.dir/src/Detector.cc.s
-
 CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/DetectorConstruction.cc
 CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o -MF CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o.d -o CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/DetectorConstruction.cc
 
 CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.i: cmake_force
@@ -128,7 +114,7 @@ CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.s: cmake_force
 CMakeFiles/rdecay01.dir/src/EventAction.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/EventAction.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/EventAction.cc
 CMakeFiles/rdecay01.dir/src/EventAction.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/rdecay01.dir/src/EventAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/rdecay01.dir/src/EventAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/EventAction.cc.o -MF CMakeFiles/rdecay01.dir/src/EventAction.cc.o.d -o CMakeFiles/rdecay01.dir/src/EventAction.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/EventAction.cc
 
 CMakeFiles/rdecay01.dir/src/EventAction.cc.i: cmake_force
@@ -142,7 +128,7 @@ CMakeFiles/rdecay01.dir/src/EventAction.cc.s: cmake_force
 CMakeFiles/rdecay01.dir/src/HistoManager.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/HistoManager.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/HistoManager.cc
 CMakeFiles/rdecay01.dir/src/HistoManager.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/rdecay01.dir/src/HistoManager.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/rdecay01.dir/src/HistoManager.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/HistoManager.cc.o -MF CMakeFiles/rdecay01.dir/src/HistoManager.cc.o.d -o CMakeFiles/rdecay01.dir/src/HistoManager.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/HistoManager.cc
 
 CMakeFiles/rdecay01.dir/src/HistoManager.cc.i: cmake_force
@@ -156,7 +142,7 @@ CMakeFiles/rdecay01.dir/src/HistoManager.cc.s: cmake_force
 CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/PhysicsList.cc
 CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o -MF CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o.d -o CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/PhysicsList.cc
 
 CMakeFiles/rdecay01.dir/src/PhysicsList.cc.i: cmake_force
@@ -170,7 +156,7 @@ CMakeFiles/rdecay01.dir/src/PhysicsList.cc.s: cmake_force
 CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/PrimaryGeneratorAction.cc
 CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o -MF CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o.d -o CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/PrimaryGeneratorAction.cc
 
 CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.i: cmake_force
@@ -184,7 +170,7 @@ CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.s: cmake_force
 CMakeFiles/rdecay01.dir/src/Run.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/Run.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/Run.cc
 CMakeFiles/rdecay01.dir/src/Run.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/rdecay01.dir/src/Run.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/rdecay01.dir/src/Run.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/Run.cc.o -MF CMakeFiles/rdecay01.dir/src/Run.cc.o.d -o CMakeFiles/rdecay01.dir/src/Run.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/Run.cc
 
 CMakeFiles/rdecay01.dir/src/Run.cc.i: cmake_force
@@ -198,7 +184,7 @@ CMakeFiles/rdecay01.dir/src/Run.cc.s: cmake_force
 CMakeFiles/rdecay01.dir/src/RunAction.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/RunAction.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/RunAction.cc
 CMakeFiles/rdecay01.dir/src/RunAction.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/rdecay01.dir/src/RunAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/rdecay01.dir/src/RunAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/RunAction.cc.o -MF CMakeFiles/rdecay01.dir/src/RunAction.cc.o.d -o CMakeFiles/rdecay01.dir/src/RunAction.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/RunAction.cc
 
 CMakeFiles/rdecay01.dir/src/RunAction.cc.i: cmake_force
@@ -208,6 +194,20 @@ CMakeFiles/rdecay01.dir/src/RunAction.cc.i: cmake_force
 CMakeFiles/rdecay01.dir/src/RunAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rdecay01.dir/src/RunAction.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/RunAction.cc -o CMakeFiles/rdecay01.dir/src/RunAction.cc.s
+
+CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o: CMakeFiles/rdecay01.dir/flags.make
+CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/SensitiveDetector.cc
+CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o: CMakeFiles/rdecay01.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o -MF CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o.d -o CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o -c /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/SensitiveDetector.cc
+
+CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/SensitiveDetector.cc > CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.i
+
+CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/SensitiveDetector.cc -o CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.s
 
 CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o: CMakeFiles/rdecay01.dir/flags.make
 CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/TrackingAction.cc
@@ -241,7 +241,6 @@ CMakeFiles/rdecay01.dir/src/TrackingMessenger.cc.s: cmake_force
 rdecay01_OBJECTS = \
 "CMakeFiles/rdecay01.dir/rdecay01.cc.o" \
 "CMakeFiles/rdecay01.dir/src/ActionInitialization.cc.o" \
-"CMakeFiles/rdecay01.dir/src/Detector.cc.o" \
 "CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o" \
 "CMakeFiles/rdecay01.dir/src/EventAction.cc.o" \
 "CMakeFiles/rdecay01.dir/src/HistoManager.cc.o" \
@@ -249,6 +248,7 @@ rdecay01_OBJECTS = \
 "CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o" \
 "CMakeFiles/rdecay01.dir/src/Run.cc.o" \
 "CMakeFiles/rdecay01.dir/src/RunAction.cc.o" \
+"CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o" \
 "CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o" \
 "CMakeFiles/rdecay01.dir/src/TrackingMessenger.cc.o"
 
@@ -257,7 +257,6 @@ rdecay01_EXTERNAL_OBJECTS =
 
 rdecay01: CMakeFiles/rdecay01.dir/rdecay01.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/ActionInitialization.cc.o
-rdecay01: CMakeFiles/rdecay01.dir/src/Detector.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/DetectorConstruction.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/EventAction.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/HistoManager.cc.o
@@ -265,6 +264,7 @@ rdecay01: CMakeFiles/rdecay01.dir/src/PhysicsList.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/Run.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/RunAction.cc.o
+rdecay01: CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/src/TrackingMessenger.cc.o
 rdecay01: CMakeFiles/rdecay01.dir/build.make
