@@ -6,7 +6,7 @@
 #include "G4ThreeVector.hh"
 #include "G4RunManager.hh"
 #include "G4AnalysisManager.hh"
-
+#include "EventAction.hh"
 
 SensitiveDetector::SensitiveDetector(G4String name) :
   G4VSensitiveDetector(name)
@@ -30,22 +30,26 @@ G4bool SensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory* Rohist
   G4double EdepStep = aStep->GetTotalEnergyDeposit();
   G4int VolumeCopyNumber = track->GetVolume()->GetCopyNo();
   G4int particleParentID = track->GetParentID();
+  //  G4ThreeVector TranslationVolVec = track->GetVolume()->GetTranslation(); 
   
   G4int particleTag=-1;
 
   if(particleName == "e-"){
-    particleTag=1;
-  } else if(particleName == "e+"){
-    particleTag=2;
-  } else if(particleName == "gamma"){
     particleTag=0;
-  } else{
+  } else if(particleName == "e+"){
+    particleTag=1;
+  } else if(particleName == "gamma"){
+    particleTag=2;
+  } else if(particleName == "alpha"){
+    particleTag=3;
+  } else {
     particleTag=-1;
   }
   
-  //G4cout << "position of: " << particleName <<" " << track->GetTrackID() << "  is:  "<< posParticle << "Energy deposited:  " << EdepStep << "  in volume:  " << VolumeCopyNumber << " ParentID: "  << track->GetParentID()  << G4endl;
+  G4cout << "position of: " << particleName <<" " << track->GetTrackID() << "  is:  "<< posParticle << " Energy deposited:  " << EdepStep << "  in volume:  " << VolumeCopyNumber << " ParentID: "  << track->GetParentID() << G4endl;
 
   G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+  
   
   G4AnalysisManager* AnalysisManager = G4AnalysisManager::Instance(); 
 
@@ -59,8 +63,10 @@ G4bool SensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory* Rohist
   AnalysisManager->FillNtupleDColumn(7,posParticle[2]);
   AnalysisManager->FillNtupleDColumn(8,EdepStep);
   AnalysisManager->FillNtupleIColumn(9,VolumeCopyNumber);
-  
+  /*AnalysisManager->FillNtupleDColumn(10,TranslationVolVec[0]);
+  AnalysisManager->FillNtupleDColumn(11,TranslationVolVec[1]);
+  AnalysisManager->FillNtupleDColumn(12,TranslationVolVec[2]);
+  */
   AnalysisManager->AddNtupleRow(0);
-
 
 }

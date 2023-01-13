@@ -1,9 +1,9 @@
-#/process/eLoss/StepFunction 0.001 0.01 mm
+/process/eLoss/StepFunction 0.01 0.1 mm
 /run/verbose 0
 /event/verbose 0
-/random/setSeeds 575841909 838392975
+/random/setSeeds 575234199 838724975
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
 /detector/RadElement GEMs
-/isotope/AtomicNumber 90
-/isotope/MassNumber 234
-/run/beamOn 10000
+/isotope/AtomicNumber 19
+/isotope/MassNumber 40
+/run/beamOn 200

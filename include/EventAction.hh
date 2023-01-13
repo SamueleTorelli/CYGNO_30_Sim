@@ -55,13 +55,16 @@ public:
   void AddDecayChain(G4String val) {fDecayChain += val;};
   void AddEvisible(G4double val)   {fEvisTot    += val;};
   void SetElement(G4String el) {fElement = el;}
+  void SetLastDecay(G4String lastEl) {fLastDecay=lastEl;}
+  G4String GetLastDecsay() {return fLastDecay;}
   
 private:
   PrimaryGeneratorAction* fPrimary;
   G4String        fDecayChain;                   
   G4double        fEvisTot;
   G4String        fElement;
-
+  G4String        fLastDecay;
+  
   G4GenericMessenger* fEventMessenger;
 };
 

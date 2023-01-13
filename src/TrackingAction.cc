@@ -50,9 +50,7 @@ TrackingAction::TrackingAction(EventAction* EA)
 :G4UserTrackingAction(),
  fEvent(EA),
  fFullChain(true)
- 
-{
-  
+{  
   fTimeWindow1 = fTimeWindow2 = 0.;
 }
 
@@ -74,7 +72,7 @@ void TrackingAction::SetTimeWindow(G4double t1, G4double dt)
 
 void TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
-  /*Run* run 
+  Run* run 
    = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
          
   G4ParticleDefinition* particle = track->GetDefinition();
@@ -105,7 +103,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   else if (particle == G4Gamma::Gamma()) ih = 3;
   else if (particle == G4Alpha::Alpha()) ih = 4;
   else if (fCharge > 2.) ih = 5;
-  if (ih) G4AnalysisManager::Instance()->FillH1(ih, Ekin);
+  //  if (ih) G4AnalysisManager::Instance()->FillH1(ih, Ekin);
   
   //Ion
   //
@@ -113,7 +111,9 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     //build decay chain
     if (ID == 1) fEvent->AddDecayChain(name);
       else       fEvent->AddDecayChain(" ---> " + name);
-    // 
+    //
+    fEvent->SetLastDecay(name);
+    
     //full chain: put at rest; if not: kill secondary      
     G4Track* tr = (G4Track*) track;
     if (fFullChain) { tr->SetKineticEnergy(0.);
@@ -126,8 +126,8 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   //example of saving random number seed of this fEvent, under condition
   //
   ////condition = (ih == 3);
-  if (condition) G4RunManager::GetRunManager()->rndmSaveThisEvent();
-  */
+  //if (condition) G4RunManager::GetRunManager()->rndmSaveThisEvent();
+
   }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -136,7 +136,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
 {
   //keep only ions
   //
-  /*if (fCharge < 3. ) return;
+  if (fCharge < 3. ) return;
   
   Run* run 
    = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
@@ -174,8 +174,8 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
     }
     G4double Pbal = Pbalance.mag();  
     run->Balance(EkinTot,Pbal);  
-    analysis->FillH1(6,EkinTot);
-    analysis->FillH1(7,Pbal);
+    //analysis->FillH1(6,EkinTot);
+    //analysis->FillH1(7,Pbal);
     fEvent->AddEvisible(EkinVis);
   }
   
@@ -184,7 +184,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
   if (!nbtrk) {
     run->EventTiming(time);                     //total time of life
     G4double weight = track->GetWeight();
-    analysis->FillH1(8,time,weight);
+    //analysis->FillH1(8,time,weight);
 ////    analysis->FillH1(8,time);    
     fTime_end = DBL_MAX;
   }
@@ -199,7 +199,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
   if ((fTime_birth <= fTimeWindow2)&&(fTime_end > fTimeWindow2)) life2 = true;
   if ((fTime_end   >  fTimeWindow1)&&(fTime_end < fTimeWindow2)) decay = true;
   if (life1||life2||decay) run->CountInTimeWindow(name,life1,life2,decay);
-  */
+  
   }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

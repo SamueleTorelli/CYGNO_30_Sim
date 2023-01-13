@@ -54,7 +54,7 @@ EventAction::EventAction(PrimaryGeneratorAction* primary)
 
   fEventMessenger = new G4GenericMessenger(this, "/detector/","Element of the detector");
   fEventMessenger->DeclareProperty("RadElement", fElement, "Select radioactive Element");
-  fElement = "Vessel";
+  //fElement = "Vessel";
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -95,7 +95,10 @@ void RunAction::BeginOfRunAction(const G4Run*)
   analysisManager->CreateNtupleDColumn("EnergyDeposit");
   //analysisManager->CreateNtuple("TotalEnergyDeposit","TotalEnergyDeposit");
   analysisManager->CreateNtupleIColumn("VolumeNumber");
-
+  /*  analysisManager->CreateNtupleDColumn("VolumeTraslX");
+  analysisManager->CreateNtupleDColumn("VolumeTraslY");
+  analysisManager->CreateNtupleDColumn("VolumeTraslZ");
+  */
   analysisManager->FinishNtuple(0);
   
 }

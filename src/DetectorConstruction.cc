@@ -217,7 +217,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       
       fListCathodes.push_back("Cathode_"+std::to_string( (j+2)*100+(i+12)) );
       
-      std::cout << "Cathode index: " << "Cathode_"+std::to_string( (j+2)*100+(i+12) ) << "\n";
+      //std::cout << "Cathode index: " << "Cathode_"+std::to_string( (j+2)*100+(i+12) ) << "\n";
       
     }
   }
@@ -269,7 +269,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	
 	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+1));
 	
-	std::cout << "North GEM: " << (i+13)*100+j*10+k+1 << "\n";
+	//std::cout << "North GEM: " << (i+13)*100+j*10+k+1 << "\n";
 
       }//chiudo for su k
       
@@ -294,7 +294,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	
 	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+4 ));
 	
-	std::cout << "South GEM: " << (i+13)*100+j*10+k+4 << "\n"; 
+	//std::cout << "South GEM: " << (i+13)*100+j*10+k+4 << "\n"; 
       }//chiudo for su j
 
     }//chiudo for su k
@@ -355,7 +355,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	
 	fListRings.push_back("Ring_"+std::to_string( (i+13)*1000+(j+10)*10+k+1) );
 
-	std::cout << "Nord Rings: " << (i+13)*1000+(j+10)*10+k+1 << "\n";
+	//std::cout << "Nord Rings: " << (i+13)*1000+(j+10)*10+k+1 << "\n";
 	
       }//chiudo for k 
     }//chiudo for j
@@ -377,7 +377,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       
 	fListRings.push_back("Ring_"+std::to_string( (i+13)*1000+(j+10)*10+k+4) );
 	
-	std::cout << "South Rings: " << (i+13)*1000+(j+10)*10+k+4 << "\n"; 
+	//std::cout << "South Rings: " << (i+13)*1000+(j+10)*10+k+4 << "\n"; 
 
       }//chiudo for k
     }//chiudo for j
@@ -588,7 +588,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       G4VPhysicalVolume* GasVolumePlus = new G4PVPlacement(0,
 							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),GEMDistanceFromCathode/2),
 							   fLogicalGasVolume,
-							   "GasVolume_"+std::to_string((i+13)*100+(j+1)),
+							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
 							   false,
 							   (i+13)*100+(j+1)
@@ -606,7 +606,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       G4VPhysicalVolume* GasVolumePlus = new G4PVPlacement(0,
 							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-GEMDistanceFromCathode/2),
 							   fLogicalGasVolume,
-							   "GasVolume_"+std::to_string((i+13)*100+(j+4)),
+							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
 							   false,
 							   (i+13)*100+(j+1)
@@ -636,9 +636,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 void DetectorConstruction::ConstructSDandField()
 {
 
-  SensitiveDetector* SensDet = new SensitiveDetector("SensitiveDetector");
-  
+  SensitiveDetector* SensDet = new SensitiveDetector("SensitiveDetector");  
   fLogicalGasVolume->SetSensitiveDetector(SensDet);
+  
   
 }
 
