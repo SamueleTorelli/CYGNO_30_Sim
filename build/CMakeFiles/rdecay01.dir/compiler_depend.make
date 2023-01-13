@@ -4945,7 +4945,21 @@ CMakeFiles/rdecay01.dir/src/SensitiveDetector.cc.o: /Users/samueletorelli/Docume
   /Users/samueletorelli/Documents/geant4/source/analysis/hntools/include/G4P2ToolsManager.hh \
   /Users/samueletorelli/Documents/geant4/source/analysis/factory/include/G4GenericAnalysisManager.icc \
   /Users/samueletorelli/Documents/geant4/source/analysis/factory/include/G4GenericFileManager.hh \
-  /Users/samueletorelli/Documents/geant4/source/analysis/factory/include/G4GenericFileManager.icc
+  /Users/samueletorelli/Documents/geant4/source/analysis/factory/include/G4GenericFileManager.icc \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/EventAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/event/include/G4UserEventAction.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/PrimaryGeneratorAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/run/include/G4VUserPrimaryGeneratorAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/event/include/G4ParticleGun.hh \
+  /Users/samueletorelli/Documents/geant4/source/event/include/G4VPrimaryGenerator.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/DetectorConstruction.hh \
+  /Users/samueletorelli/Documents/geant4/source/run/include/G4VUserDetectorConstruction.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4PhysicalVolumeStore.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VStoreNotifier.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4VNotifier.hh \
+  /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4GenericMessenger.hh \
+  /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyType.hh \
+  /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyMethod.hh
 
 CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o: /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/src/TrackingAction.cc \
   /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/TrackingAction.hh \
