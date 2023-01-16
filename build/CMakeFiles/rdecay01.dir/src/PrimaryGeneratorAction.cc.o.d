@@ -296,12 +296,94 @@ CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4PhysicalVolumeStore.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VStoreNotifier.hh \
   /Users/samueletorelli/Documents/geant4/source/global/management/include/G4VNotifier.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/SensitiveDetector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSensitiveDetector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHit.hh \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4Step.hh \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4StepPoint.hh \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4SteppingControl.hh \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4StepStatus.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4TouchableHandle.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VTouchable.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VTouchable.icc \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4ReferenceCountedHandle.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4Material.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4Element.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4Isotope.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4IonisParamElm.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4IsotopeVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4ElementTable.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4ElementVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4MaterialPropertiesTable.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4MaterialPropertiesIndex.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4MaterialPropertyVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4PhysicsFreeVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4PhysicsVector.hh \
+  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/fstream \
+  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/filesystem \
+  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/stack \
+  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/deque \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4Log.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4PhysicsVectorType.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4PhysicsVector.icc \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4IonisParamMat.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4DensityEffectCalculator.hh \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4SandiaTable.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4OrderedTable.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4DataVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4DataVector.icc \
+  /Users/samueletorelli/Documents/geant4/source/materials/include/G4MaterialTable.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4LogicalVolume.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4Region.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4Region.icc \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4LogicalVolume.icc \
-  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.icc \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4StepPoint.icc \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4TrackVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4Profiler.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4Profiler.icc \
+  /Users/samueletorelli/Documents/geant4/source/externals/ptl/include/PTL/Globals.hh \
+  /Users/samueletorelli/Documents/geant4/source/externals/ptl/include/PTL/Types.hh \
+  /Users/samueletorelli/Documents/geant4/build/source/externals/ptl/src/PTL/Config.hh \
+  /Users/samueletorelli/Documents/geant4/source/externals/ptl/include/PTL/Utility.hh \
+  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/set \
+  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/array \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4Step.icc \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4Track.hh \
+  /Users/samueletorelli/Documents/geant4/source/track/include/trkdefs.hh \
+  /Users/samueletorelli/Documents/geant4/source/particles/management/include/G4DynamicParticle.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/HEPGeometry/include/G4LorentzVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/particles/management/include/G4ElectronOccupancy.hh \
+  /Users/samueletorelli/Documents/geant4/source/particles/management/include/G4DynamicParticle.icc \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4TrackStatus.hh \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4VUserTrackInformation.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4PhysicsModelCatalog.hh \
+  /Users/samueletorelli/Documents/geant4/source/track/include/G4Track.icc \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4HCofThisEvent.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHitsCollection.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VReadOutGeometry.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4SensitiveVolumeList.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistory.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistory.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4AffineTransform.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/HEPGeometry/include/G4Transform3D.hh \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Transform3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Transform3D.icc \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Point3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/BasicVector3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Vector3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Normal3D.h \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4AffineTransform.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevel.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevelRep.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevelRep.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevel.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistoryPool.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistory.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistory.icc \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4CollectionNameVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSDFilter.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/RunAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/run/include/G4UserRunAction.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4GenericMessenger.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4UImessenger.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4UIdirectory.hh \
@@ -311,23 +393,15 @@ CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/global/management/include/G4ApplicationState.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyType.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyMethod.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.icc \
   /Users/samueletorelli/Documents/geant4/source/event/include/G4Event.hh \
   /Users/samueletorelli/Documents/geant4/source/event/include/evtdefs.hh \
-  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4HCofThisEvent.hh \
-  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHitsCollection.hh \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/digits/include/G4DCofThisEvent.hh \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/digits/include/G4VDigiCollection.hh \
   /Users/samueletorelli/Documents/geant4/source/event/include/G4TrajectoryContainer.hh \
   /Users/samueletorelli/Documents/geant4/source/tracking/include/G4VTrajectory.hh \
   /Users/samueletorelli/Documents/geant4/source/event/include/G4VUserEventInformation.hh \
-  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4Profiler.hh \
-  /Users/samueletorelli/Documents/geant4/source/global/management/include/G4Profiler.icc \
-  /Users/samueletorelli/Documents/geant4/source/externals/ptl/include/PTL/Globals.hh \
-  /Users/samueletorelli/Documents/geant4/source/externals/ptl/include/PTL/Types.hh \
-  /Users/samueletorelli/Documents/geant4/build/source/externals/ptl/src/PTL/Config.hh \
-  /Users/samueletorelli/Documents/geant4/source/externals/ptl/include/PTL/Utility.hh \
-  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/set \
-  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/array \
   /Users/samueletorelli/Documents/geant4/source/particles/management/include/G4ParticleTable.hh \
   /Users/samueletorelli/Documents/geant4/source/particles/management/include/G4ParticleTableIterator.hh \
   /Users/samueletorelli/Documents/geant4/source/particles/management/include/G4ParticleTable.icc \
@@ -339,10 +413,6 @@ CMakeFiles/rdecay01.dir/src/PrimaryGeneratorAction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Random/Randomize.h \
   /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Random/DualRand.h \
   /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Random/RandomEngine.h \
-  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/fstream \
-  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/filesystem \
-  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/stack \
-  /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/deque \
   /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Random/RandomEngine.icc \
   /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Random/JamesRandom.h \
   /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Random/MixMaxRng.h \

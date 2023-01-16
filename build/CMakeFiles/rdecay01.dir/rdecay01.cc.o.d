@@ -562,6 +562,18 @@ CMakeFiles/rdecay01.dir/rdecay01.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4PhysicalVolumeStore.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VStoreNotifier.hh \
   /Users/samueletorelli/Documents/geant4/source/global/management/include/G4VNotifier.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/SensitiveDetector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSensitiveDetector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHit.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VReadOutGeometry.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4SensitiveVolumeList.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4CollectionNameVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSDFilter.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/RunAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/run/include/G4UserRunAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4GenericMessenger.hh \
+  /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyType.hh \
+  /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyMethod.hh \
   /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/PhysicsList.hh \
   /Users/samueletorelli/Documents/geant4/source/run/include/G4VModularPhysicsList.hh \
   /Users/samueletorelli/Documents/geant4/source/run/include/G4VUserPhysicsList.hh \
@@ -677,7 +689,6 @@ CMakeFiles/rdecay01.dir/rdecay01.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/visualization/modeling/include/G4HitFilterFactories.hh \
   /Users/samueletorelli/Documents/geant4/source/graphics_reps/include/G4VFilter.hh \
   /Users/samueletorelli/Documents/geant4/source/visualization/modeling/include/G4VModelFactory.hh \
-  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHit.hh \
   /Users/samueletorelli/Documents/geant4/source/visualization/modeling/include/G4DigiFilterFactories.hh \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/digits/include/G4VDigi.hh \
   /Users/samueletorelli/Documents/geant4/source/visualization/modeling/include/G4TrajectoryFilterFactories.hh \

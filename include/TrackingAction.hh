@@ -37,6 +37,7 @@
 #include "globals.hh"
 
 class EventAction;
+class DetectorConstruction;
 class TrackingMessenger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -44,7 +45,7 @@ class TrackingMessenger;
 class TrackingAction : public G4UserTrackingAction {
 
 public:  
-  TrackingAction(EventAction*);
+  TrackingAction(EventAction*,DetectorConstruction*);
   ~TrackingAction();
   
   virtual void  PreUserTrackingAction(const G4Track*);
@@ -55,8 +56,10 @@ public:
   
 private:
   EventAction*        fEvent;
+  DetectorConstruction* fDetector;
   G4double fCharge, fMass;        
   G4bool   fFullChain;
+  
     
   
   G4double fTime_birth,  fTime_end;

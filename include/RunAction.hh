@@ -35,6 +35,7 @@
 
 #include "G4UserRunAction.hh"
 #include "globals.hh"
+#include "G4GenericMessenger.hh"
 
 class Run;
 class HistoManager;
@@ -56,6 +57,9 @@ class RunAction : public G4UserRunAction
     PrimaryGeneratorAction* fPrimary;
     Run*                    fRun;
     HistoManager*           fHistoManager;    
+    G4GenericMessenger*     fRunMessenger; 
+
+    G4String fOutFileName;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

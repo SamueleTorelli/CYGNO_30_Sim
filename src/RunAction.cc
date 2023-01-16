@@ -45,17 +45,18 @@
 RunAction::RunAction(PrimaryGeneratorAction* kin)
 :G4UserRunAction(),
  fPrimary(kin),
- fRun(0),
- fHistoManager(0)
+ fRun(0) 
 {
-  fHistoManager = new HistoManager();
+  fRunMessenger = new G4GenericMessenger(this, "/output/","Output file");
+  fRunMessenger->DeclareProperty("OutFile", fOutFileName, "Output file name");
+
+  fOutFileName="output";
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 RunAction::~RunAction()
 { 
-  delete fHistoManager;
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -80,7 +81,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
   //
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   //if ( analysisManager->IsActive() ) {
-  analysisManager->OpenFile("output.root");
+  analysisManager->OpenFile("outfiles/"+fOutFileName+".root");
     //}
 
   analysisManager->CreateNtuple("Hits","Hits");
@@ -95,10 +96,10 @@ void RunAction::BeginOfRunAction(const G4Run*)
   analysisManager->CreateNtupleDColumn("EnergyDeposit");
   //analysisManager->CreateNtuple("TotalEnergyDeposit","TotalEnergyDeposit");
   analysisManager->CreateNtupleIColumn("VolumeNumber");
-  /*  analysisManager->CreateNtupleDColumn("VolumeTraslX");
+  analysisManager->CreateNtupleDColumn("VolumeTraslX");
   analysisManager->CreateNtupleDColumn("VolumeTraslY");
   analysisManager->CreateNtupleDColumn("VolumeTraslZ");
-  */
+  
   analysisManager->FinishNtuple(0);
   
 }

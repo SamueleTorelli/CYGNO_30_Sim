@@ -487,11 +487,40 @@ CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4PhysicalVolumeStore.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VStoreNotifier.hh \
   /Users/samueletorelli/Documents/geant4/source/global/management/include/G4VNotifier.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.icc \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/SensitiveDetector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSensitiveDetector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHit.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4HCofThisEvent.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHitsCollection.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VReadOutGeometry.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4SensitiveVolumeList.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistory.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistory.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4AffineTransform.hh \
+  /Users/samueletorelli/Documents/geant4/source/global/HEPGeometry/include/G4Transform3D.hh \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Transform3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Transform3D.icc \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Point3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/BasicVector3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Vector3D.h \
+  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Normal3D.h \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4AffineTransform.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevel.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevelRep.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevelRep.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevel.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistoryPool.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistory.icc \
+  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistory.icc \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4CollectionNameVector.hh \
+  /Users/samueletorelli/Documents/geant4/source/digits_hits/detector/include/G4VSDFilter.hh \
+  /Users/samueletorelli/Documents/Dottorato/CYGNO_30/CYGNO_30_Sim/include/RunAction.hh \
+  /Users/samueletorelli/Documents/geant4/source/run/include/G4UserRunAction.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4GenericMessenger.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyType.hh \
   /Users/samueletorelli/Documents/geant4/source/intercoms/include/G4AnyMethod.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.hh \
+  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4VSolid.icc \
   /Users/samueletorelli/Documents/geant4/source/processes/management/include/G4ParticleTypes.hh \
   /Users/samueletorelli/Documents/geant4/source/particles/bosons/include/G4ChargedGeantino.hh \
   /Users/samueletorelli/Documents/geant4/source/particles/bosons/include/G4Geantino.hh \
@@ -601,8 +630,6 @@ CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/run/include/rundefs.hh \
   /Users/samueletorelli/Documents/geant4/source/event/include/G4Event.hh \
   /Users/samueletorelli/Documents/geant4/source/event/include/evtdefs.hh \
-  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4HCofThisEvent.hh \
-  /Users/samueletorelli/Documents/geant4/source/digits_hits/hits/include/G4VHitsCollection.hh \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/digits/include/G4DCofThisEvent.hh \
   /Users/samueletorelli/Documents/geant4/source/digits_hits/digits/include/G4VDigiCollection.hh \
   /Users/samueletorelli/Documents/geant4/source/event/include/G4TrajectoryContainer.hh \
@@ -619,29 +646,11 @@ CMakeFiles/rdecay01.dir/src/TrackingAction.cc.o: \
   /Users/samueletorelli/Documents/geant4/source/tracking/include/G4TrackingManager.hh \
   /Users/samueletorelli/Documents/geant4/source/tracking/include/G4SteppingManager.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/navigation/include/G4Navigator.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4AffineTransform.hh \
-  /Users/samueletorelli/Documents/geant4/source/global/HEPGeometry/include/G4Transform3D.hh \
-  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Transform3D.h \
-  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Transform3D.icc \
-  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Point3D.h \
-  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/BasicVector3D.h \
-  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Vector3D.h \
-  /Users/samueletorelli/Documents/geant4/source/externals/clhep/include/CLHEP/Geometry/Normal3D.h \
-  /Users/samueletorelli/Documents/geant4/source/geometry/management/include/G4AffineTransform.icc \
   /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4GRSVolume.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4GRSVolume.icc \
   /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4GRSSolid.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4GRSSolid.icc \
   /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistoryHandle.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistory.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistory.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevel.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevelRep.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevelRep.icc \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationLevel.icc \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistoryPool.hh \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4NavigationHistory.icc \
-  /Users/samueletorelli/Documents/geant4/source/geometry/volumes/include/G4TouchableHistory.icc \
   /Users/samueletorelli/Documents/geant4/source/geometry/navigation/include/G4NormalNavigation.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/navigation/include/G4AuxiliaryNavServices.hh \
   /Users/samueletorelli/Documents/geant4/source/geometry/navigation/include/G4AuxiliaryNavServices.icc \

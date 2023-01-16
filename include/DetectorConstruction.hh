@@ -36,6 +36,7 @@
 #include "G4VUserDetectorConstruction.hh"
 #include "G4VPhysicalVolume.hh"
 #include "G4PhysicalVolumeStore.hh"
+#include "SensitiveDetector.hh"
 #include "globals.hh"
 
 
@@ -77,6 +78,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   std::vector<G4String> GetRingsList() {return fListRings;}
   std::vector<G4String> GetLensList() {return fListLens;}
   std::vector<G4String> GetSensorsList() {return fListSensors;}
+
+  SensitiveDetector* GetSensitiveDetector(){return fSensitiveDetector;}
   
   private:
   
@@ -113,6 +116,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
   G4LogicalVolume* fLogicalGasVolume;
 
+  SensitiveDetector* fSensitiveDetector;
+  
   virtual void ConstructSDandField();
   
 };

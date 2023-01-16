@@ -13,9 +13,14 @@ public:
   SensitiveDetector(G4String);
   ~SensitiveDetector();
 
+  void SetLastDecay(G4String aString){lastDecay = aString;}
+  G4String GetLastDecay(){return lastDecay;}
+  
 private:
   virtual G4bool ProcessHits(G4Step *, G4TouchableHistory*);
 
+  G4String lastDecay;
+  
 };
 
 

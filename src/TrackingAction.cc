@@ -46,9 +46,10 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-TrackingAction::TrackingAction(EventAction* EA)
+TrackingAction::TrackingAction(EventAction* EA,DetectorConstruction* det)
 :G4UserTrackingAction(),
  fEvent(EA),
+ fDetector(det),
  fFullChain(true)
 {  
   fTimeWindow1 = fTimeWindow2 = 0.;
@@ -104,7 +105,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   else if (particle == G4Alpha::Alpha()) ih = 4;
   else if (fCharge > 2.) ih = 5;
   //  if (ih) G4AnalysisManager::Instance()->FillH1(ih, Ekin);
-  
+
   //Ion
   //
   if (fCharge > 2.) {
@@ -113,7 +114,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
       else       fEvent->AddDecayChain(" ---> " + name);
     //
     fEvent->SetLastDecay(name);
-    
+    fDetector->GetSensitiveDetector()->SetLastDecay(name);
     //full chain: put at rest; if not: kill secondary      
     G4Track* tr = (G4Track*) track;
     if (fFullChain) { tr->SetKineticEnergy(0.);
