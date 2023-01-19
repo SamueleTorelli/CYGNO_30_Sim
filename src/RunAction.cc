@@ -99,6 +99,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
   analysisManager->CreateNtupleDColumn("VolumeTraslX");
   analysisManager->CreateNtupleDColumn("VolumeTraslY");
   analysisManager->CreateNtupleDColumn("VolumeTraslZ");
+  analysisManager->CreateNtupleSColumn("Nucleus");
   
   analysisManager->FinishNtuple(0);
   

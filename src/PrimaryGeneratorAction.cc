@@ -145,12 +145,13 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
   G4ThreeVector Point = TranslationVolume + PointOnSurface - G4UniformRand()*width*Normal; //random point in the random volume as the translation vector + a point on the surface + a random depth 
 
   
+  /*
   G4cout<< "ElementNumber_____ " << nEl << "\n";
   G4cout<< "Element " << Elements[nEl] << "\n";
   
   G4cout <<"PointOnSurface " << PointOnSurface << "\n";
   G4cout <<"TranslationVolume " << TranslationVolume << G4endl;
-
+  */
   
   return Point;
   

@@ -207,10 +207,10 @@ void Run::Merge(const G4Run* run)
     const ParticleData& localData = itn->second;   
     if ( fParticleDataMap.find(name) == fParticleDataMap.end()) {
       fParticleDataMap[name]
-       = ParticleData(localData.fCount, 
-                      localData.fEmean, 
-                      localData.fEmin, 
-                      localData.fEmax,
+	= ParticleData(localData.fCount, 
+		       localData.fEmean, 
+		       localData.fEmin, 
+		       localData.fEmax,
                       localData.fTmean);
     }
     else {
@@ -384,7 +384,7 @@ void Run::EndOfRun()
  
  //normalize histograms
  //
- G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+ /*G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
  G4double factor = 100./nbEvents;
  analysisManager->ScaleH1(1,factor);
  analysisManager->ScaleH1(2,factor);
@@ -400,6 +400,7 @@ void Run::EndOfRun()
  // restore default precision
  // 
  G4cout.precision(dfprec);
+ */
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

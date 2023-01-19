@@ -73,8 +73,7 @@ void TrackingAction::SetTimeWindow(G4double t1, G4double dt)
 
 void TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
-  Run* run 
-   = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+  Run* run = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
          
   G4ParticleDefinition* particle = track->GetDefinition();
   G4String name   = particle->GetParticleName();
@@ -113,7 +112,9 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     if (ID == 1) fEvent->AddDecayChain(name);
       else       fEvent->AddDecayChain(" ---> " + name);
     //
+    //G4cout << "here in tracking action " << fEvent  << " set to " << name <<G4endl;
     fEvent->SetLastDecay(name);
+    
     fDetector->GetSensitiveDetector()->SetLastDecay(name);
     //full chain: put at rest; if not: kill secondary      
     G4Track* tr = (G4Track*) track;

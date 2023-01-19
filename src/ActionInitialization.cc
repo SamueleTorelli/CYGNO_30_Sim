@@ -52,6 +52,7 @@ void ActionInitialization::BuildForMaster() const
 {
   RunAction* runAction = new RunAction(0);
   SetUserAction(runAction);
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

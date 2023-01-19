@@ -63,7 +63,7 @@ int main(int argc,char** argv) {
   //construct the run manager
   auto runManager = G4RunManagerFactory::CreateRunManager();  
 
-  runManager->SetNumberOfThreads(4);
+  runManager->SetNumberOfThreads(1);
 
   if (argc==3) {
     G4int nThreads = G4UIcommand::ConvertToInt(argv[2]);

@@ -33,7 +33,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory* Rohist
   G4ThreeVector TranslationVolVec = track->GetVolume()->GetTranslation(); 
 
   G4String DecayElement = GetLastDecay();
-  
+
   G4int particleTag=-1;
 
   if(particleName == "e-"){
@@ -48,7 +48,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory* Rohist
     particleTag=-1;
   }
   
-  G4cout << "position of: " << particleName <<" " << track->GetTrackID() << "  is:  "<< posParticle << " Energy deposited:  " << EdepStep << "  in volume:  " << VolumeCopyNumber << " ParentID: "  << track->GetParentID()<< " lastdecay: " << DecayElement << G4endl;
+  //G4cout << "position of: " << particleName <<" " << track->GetTrackID() << "  is:  "<< posParticle << " Energy deposited:  " << EdepStep << "  in volume:  " << VolumeCopyNumber << " ParentID: "  << track->GetParentID()<< " lastdecay: " << DecayElement << G4endl;
 
   G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
   
@@ -68,6 +68,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory* Rohist
   AnalysisManager->FillNtupleDColumn(10,TranslationVolVec[0]);
   AnalysisManager->FillNtupleDColumn(11,TranslationVolVec[1]);
   AnalysisManager->FillNtupleDColumn(12,TranslationVolVec[2]);
+  AnalysisManager->FillNtupleSColumn(13,DecayElement);
  
   AnalysisManager->AddNtupleRow(0);
 
