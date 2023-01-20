@@ -5,6 +5,6 @@
 /output/OutFile Rings_Co60
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
 /detector/RadElement Rings
-/isotope/AtomicNumber 27
-/isotope/MassNumber 60
+/isotope/AtomicNumber 92
+/isotope/MassNumber 238
 /run/beamOn 10000
