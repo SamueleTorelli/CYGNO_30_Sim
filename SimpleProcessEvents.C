@@ -35,70 +35,90 @@ void ProcessFile(std::string filename){
 
   Int_t Out_evNumber;
   std::string Out_PartName;
-  Int_t Nhits;
+  std::string Out_Nucl;
   Int_t Out_VolNum;
   Int_t Out_PartID;
-  std::vector<Double_t> X_Out,Y_Out,Z_Out,EDep_Out,VolNnum_Out;
+  std::vector<Double_t> EDep_Out, VolNnum_Out, XVertex_Out, YVertex_Out, ZVertex_Out;
+
+  std::map<Int_t, double_t> EVolumeMap;
   
   TTree* outTree = new TTree("elabHits","elabHits");
   outTree->Branch("evNumber",&Out_evNumber);
   outTree->Branch("PartName",&Out_PartName);
-  outTree->Branch("Nhits",&Nhits);
-  outTree->Branch("X_out",&X_Out);
-  outTree->Branch("Y_out",&Y_Out);
-  outTree->Branch("Z_out",&Z_Out);
   outTree->Branch("EDep_Out",&EDep_Out);
   outTree->Branch("VolNnum_Out",&VolNnum_Out);
   outTree->Branch("Nucleus",&Out_Nucl);
 
   Int_t flag=0;
-  Nhits=0;
+  Int_t Nentries = tree->GetEntries();
+
+  tree->GetEntry(0);
+  Out_Nucl=Nucleus;
   
-  for(int i=0;i<tree->GetEntries();i++){
+  for(int i=0;i<Nentries;i++){
     tree->GetEntry(i);
 
+    if(i%10000==0) std::cout << i <<"/" << Nentries << "\n";
+    
     if(strcmp(ParticleName,"e-")!=0 && strcmp(ParticleName,"e+")!=0 && strcmp(ParticleName,"alpha")!=0){
       
       continue;
       
-    }else if( strcmp(CreationProcess,"RadioactiveDecay")==0 && flag == 0 ){
+    }else if( strcmp(CreationProcess,"RadioactiveDecay")==0 && strcmp(Nucleus,Out_Nucl.c_str())==0 && flag == 0 ){
 
       Out_evNumber = Evn;
       Out_PartName = ParticleName;
       Out_Nucl=Nucleus;
-      Nhits++;
-      X_Out.push_back(x_hits);
-      Y_Out.push_back(y_hits);
-      Z_Out.push_back(z_hits);
-      EDep_Out.push_back(EnergyDeposit);
-      VolNnum_Out.push_back(VolumeNumber);
-            
-    }else if( (strcmp(CreationProcess,"ionIoni")==0 || strcmp(CreationProcess,"eIoni")==0) ){
 
+      if(EVolumeMap.find(VolumeNumber) == EVolumeMap.end()){
+	XVertex_Out.push_back(x_hits);
+	YVertex_Out.push_back(y_hits);
+	ZVertex_Out.push_back(z_hits);	
+	EVolumeMap[VolumeNumber]= EnergyDeposit;
+      } else {
+	EVolumeMap[VolumeNumber]+=EnergyDeposit;
+      }
+      
+    }else if( (strcmp(CreationProcess,"ionIoni")==0 || strcmp(CreationProcess,"eIoni")==0) ){
+      
       flag=1;
       
-      Nhits++;
-      X_Out.push_back(x_hits);
-      Y_Out.push_back(y_hits);
-      Z_Out.push_back(z_hits);
-      EDep_Out.push_back(EnergyDeposit);
-      VolNnum_Out.push_back(VolumeNumber);
+      if(EVolumeMap.find(VolumeNumber) == EVolumeMap.end()){
+	XVertex_Out.push_back(x_hits);
+	YVertex_Out.push_back(y_hits);
+	ZVertex_Out.push_back(z_hits);
+	EVolumeMap[VolumeNumber]= EnergyDeposit;
+      } else {
+	EVolumeMap[VolumeNumber]+=EnergyDeposit;
+      }
 
     }else{
-                        
+
+      for(auto& [key, value] : EVolumeMap){
+	VolNnum_Out.push_back(key);
+	EDep_Out.push_back(value);
+      }
+      
       outTree->Fill();
 
-      flag=0;
-      X_Out.clear(); Y_Out.clear(); Z_Out.clear(); EDep_Out.clear(); VolNnum_Out.clear();
       
-      Nhits=1;
+      flag=0;
+      EVolumeMap.clear();
+      EDep_Out.clear(); VolNnum_Out.clear(); XVertex_Out.clear(); YVertex_Out.clear(); ZVertex_Out.clear();
+
       Out_evNumber = Evn;
       Out_PartName = ParticleName;
-      X_Out.push_back(x_hits);
-      Y_Out.push_back(y_hits);
-      Z_Out.push_back(z_hits);
-      EDep_Out.push_back(EnergyDeposit);
-      VolNnum_Out.push_back(VolumeNumber);
+      Out_Nucl=Nucleus;
+
+      if(EVolumeMap.find(VolumeNumber) == EVolumeMap.end()){
+	XVertex_Out.push_back(x_hits);
+	YVertex_Out.push_back(y_hits);
+	ZVertex_Out.push_back(z_hits);	
+	EVolumeMap[VolumeNumber]= EnergyDeposit;
+      } else {
+	EVolumeMap[VolumeNumber]+=EnergyDeposit;
+      }
+
     }
     
   }//chiudo for
