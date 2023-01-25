@@ -571,7 +571,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* GasVisAttributes = new G4VisAttributes(GasColor);
   GasVisAttributes->SetForceSolid(true);
   
-  G4Box* solidGasVolume = new G4Box("GasVolume",CathodeSize_x/2,CathodeSize_y/2,GEMDistanceFromCathode/2);
+  G4Box* solidGasVolume = new G4Box("GasVolume",CathodeSize_x/2,CathodeSize_y/2,(GEMDistanceFromCathode-CathodeSize_z)/2);
 
   fLogicalGasVolume = new G4LogicalVolume(solidGasVolume,
 					  CYGNO_gas,
@@ -591,7 +591,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
 							   false,
-							   (i+13)*100+(j+1)
+							   counter
 							   );
 
       fListDetector.push_back("GasVolume_"+std::to_string(counter));
@@ -603,13 +603,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   for(G4int i=-12;i<13;i++){ 
     for(G4int j=-1;j<2;j++){
       
-      G4VPhysicalVolume* GasVolumePlus = new G4PVPlacement(0,
+      G4VPhysicalVolume* GasVolumeMinus = new G4PVPlacement(0,
 							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-GEMDistanceFromCathode/2),
 							   fLogicalGasVolume,
 							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
 							   false,
-							   (i+13)*100+(j+1)
+							   counter
 							   );
       
       fListDetector.push_back("GasVolume_"+std::to_string(counter));
