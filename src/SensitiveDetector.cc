@@ -70,11 +70,8 @@ G4bool SensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory* Rohist
   AnalysisManager->FillNtupleDColumn(7,posParticle[2]);
   AnalysisManager->FillNtupleDColumn(8,EdepStep);
   AnalysisManager->FillNtupleIColumn(9,VolumeCopyNumber);
-  AnalysisManager->FillNtupleDColumn(10,TranslationVolVec[0]);
-  AnalysisManager->FillNtupleDColumn(11,TranslationVolVec[1]);
-  AnalysisManager->FillNtupleDColumn(12,TranslationVolVec[2]);
-  AnalysisManager->FillNtupleSColumn(13,DecayElement);
-  AnalysisManager->FillNtupleSColumn(14,ProcessType);
+  AnalysisManager->FillNtupleSColumn(10,DecayElement);
+  AnalysisManager->FillNtupleSColumn(11,ProcessType);
   
   AnalysisManager->AddNtupleRow(0);
 

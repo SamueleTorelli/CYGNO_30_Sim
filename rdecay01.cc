@@ -81,6 +81,8 @@ int main(int argc,char** argv) {
   G4PhysListFactory factory;
   G4VModularPhysicsList* physicsList = factory.GetReferencePhysList("FTFP_BERT_HP");
   physicsList->SetVerboseLevel(0);
+  G4EmStandardPhysics* emPhysics = new G4EmStandardPhysics();
+  physicsList->RegisterPhysics(emPhysics);
   
   runManager->SetUserInitialization(physicsList);
 

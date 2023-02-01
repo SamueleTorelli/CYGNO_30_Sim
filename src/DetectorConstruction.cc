@@ -595,7 +595,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 							   );
 
       fListDetector.push_back("GasVolume_"+std::to_string(counter));
+
+      G4cout  << "detN " << counter << "\t coord " << i*(CathodeSize_x+detectorSpace)  << " " <<j*(CathodeSize_y+detectorSpace) << " " << GEMDistanceFromCathode/2<< "\n";
+
       counter++;
+
       
     }//chiudo for j
   }//chiudo for i
@@ -613,8 +617,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 							   );
       
       fListDetector.push_back("GasVolume_"+std::to_string(counter));
+
+      G4cout  << "detN " << counter << "\t coord " << i*(CathodeSize_x+detectorSpace)  << " " <<j*(CathodeSize_y+detectorSpace) << " " << -GEMDistanceFromCathode/2<< "\n";
+      
       counter++;
-     
+
     }//chiudo for j
   }//chiudo secondo for i
   

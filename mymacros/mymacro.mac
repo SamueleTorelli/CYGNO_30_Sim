@@ -2,9 +2,9 @@
 /run/verbose 0
 /event/verbose 0
 /random/setSeeds 575223199 8381234975
-/output/OutFile Rings_Co60
+/output/OutFile Cathodes_U238
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
-/detector/RadElement Rings
+/detector/RadElement Cathodes
 /isotope/AtomicNumber 92
 /isotope/MassNumber 238
-/run/beamOn 2000
+/run/beamOn 5000

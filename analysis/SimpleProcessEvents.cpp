@@ -13,9 +13,9 @@ int main(int argc, char** argv){
   Int_t Evn,ParticleID,ParticleTag,ParentID,VolumeNumber;
   Double_t x_hits,y_hits,z_hits,VolumeTraslX,VolumeTraslY,VolumeTraslZ,EnergyDeposit;
 
-  Char_t Nucleus[10];
+  Char_t Nucleus[20];
 
-  Char_t ParticleName[10];
+  Char_t ParticleName[20];
 
   Char_t CreationProcess[20];
   
@@ -47,6 +47,9 @@ int main(int argc, char** argv){
   std::vector<Double_t> EDep_Out, VolNnum_Out, XVertex_Out, YVertex_Out, ZVertex_Out;
 
   std::map<Int_t, double_t> EVolumeMap;
+  std::vector<Int_t> VolumNumList;
+ 
+  std::string Out_Process;
   
   TTree* outTree = new TTree("elabHits","elabHits");
   outTree->Branch("evNumber",&Out_evNumber);
@@ -54,12 +57,16 @@ int main(int argc, char** argv){
   outTree->Branch("EDep_Out",&EDep_Out);
   outTree->Branch("VolNnum_Out",&VolNnum_Out);
   outTree->Branch("Nucleus",&Out_Nucl);
-
+  outTree->Branch("X_Vertex",&XVertex_Out);
+  outTree->Branch("Y_Vertex",&YVertex_Out);
+  outTree->Branch("Z_Vertex",&ZVertex_Out);
+  
   Int_t flag=0;
   Int_t Nentries = tree->GetEntries();
 
   tree->GetEntry(0);
   Out_Nucl=Nucleus;
+  Out_Process = CreationProcess;
   
   for(int i=0;i<Nentries;i++){
     tree->GetEntry(i);
@@ -69,8 +76,9 @@ int main(int argc, char** argv){
     if(strcmp(ParticleName,"e-")!=0 && strcmp(ParticleName,"e+")!=0 && strcmp(ParticleName,"alpha")!=0){
       
       continue;
-      
-    }else if( strcmp(CreationProcess,"RadioactiveDecay")==0 && strcmp(Nucleus,Out_Nucl.c_str())==0 && flag == 0 ){
+
+      //check the phot creation process
+    }else if( strcmp(CreationProcess,Out_Process.c_str())==0  &&  strcmp(Nucleus,Out_Nucl.c_str())==0  &&  flag == 0 ){
 
       Out_evNumber = Evn;
       Out_PartName = ParticleName;
@@ -81,6 +89,7 @@ int main(int argc, char** argv){
 	YVertex_Out.push_back(y_hits);
 	ZVertex_Out.push_back(z_hits);	
 	EVolumeMap[VolumeNumber]= EnergyDeposit;
+	VolumNumList.push_back(VolumeNumber);
       } else {
 	EVolumeMap[VolumeNumber]+=EnergyDeposit;
       }
@@ -94,15 +103,16 @@ int main(int argc, char** argv){
 	YVertex_Out.push_back(y_hits);
 	ZVertex_Out.push_back(z_hits);
 	EVolumeMap[VolumeNumber]= EnergyDeposit;
+	VolumNumList.push_back(VolumeNumber); 
       } else {
 	EVolumeMap[VolumeNumber]+=EnergyDeposit;
       }
 
     }else{
 
-      for(auto& [key, value] : EVolumeMap){
-	VolNnum_Out.push_back(key);
-	EDep_Out.push_back(value);
+      for(auto& vnum: VolumNumList){
+	VolNnum_Out.push_back(vnum);
+	EDep_Out.push_back(EVolumeMap[vnum]);
       }
       
       outTree->Fill();
@@ -110,17 +120,19 @@ int main(int argc, char** argv){
       
       flag=0;
       EVolumeMap.clear();
-      EDep_Out.clear(); VolNnum_Out.clear(); XVertex_Out.clear(); YVertex_Out.clear(); ZVertex_Out.clear();
+      EDep_Out.clear(); VolNnum_Out.clear(); XVertex_Out.clear(); YVertex_Out.clear(); ZVertex_Out.clear(); VolumNumList.clear();
 
       Out_evNumber = Evn;
       Out_PartName = ParticleName;
       Out_Nucl=Nucleus;
-
+      Out_Process=CreationProcess;
+	
       if(EVolumeMap.find(VolumeNumber) == EVolumeMap.end()){
 	XVertex_Out.push_back(x_hits);
 	YVertex_Out.push_back(y_hits);
 	ZVertex_Out.push_back(z_hits);	
 	EVolumeMap[VolumeNumber]= EnergyDeposit;
+	VolumNumList.push_back(VolumeNumber); 
       } else {
 	EVolumeMap[VolumeNumber]+=EnergyDeposit;
       }
