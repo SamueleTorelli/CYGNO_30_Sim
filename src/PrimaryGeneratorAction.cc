@@ -66,7 +66,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* Detector)
   fPrimaryMessenger->DeclareProperty("AtomicNumber", fZIsotope, "Select atomic number");
   fPrimaryMessenger->DeclareProperty("MassNumber", fAIsotope, "Select mass number");
     
-  fZIsotope = 29, fAIsotope = 64;
+  fZIsotope = 92, fAIsotope = 238;
   
 }
 

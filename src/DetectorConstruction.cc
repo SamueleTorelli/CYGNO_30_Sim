@@ -43,7 +43,10 @@
 #include "G4SubtractionSolid.hh"
 #include "G4PhysicalVolumeStore.hh"
 #include "G4Tubs.hh"
+#include <G4UnitsTable.hh>
+
 #include "SensitiveDetector.hh"
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -154,6 +157,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   CYGNO_gas->AddMaterial(He_gas, He_gas->GetDensity()/densityMix*100*perCent);
   CYGNO_gas->AddMaterial(CF4_gas, CF4_gas->GetDensity()/densityMix*100*perCent);
 
+  std::map<G4String,G4double> MassMap={
+    {"Cathodes",0},
+    {"Rings",0},
+    {"GEMs",0},
+    {"Vessel",0},
+    {"Lens",0},
+    {"Sensors",0}
+  };
   
   //     
   // World
@@ -203,7 +214,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   logicCathode->SetVisAttributes(cathodeVisAttributes);
     
   G4double detectorSpace = 0.3*cm;
-     
+
   for(G4int i=-12;i<13;i++){
     for(G4int j=-1;j<2;j++){
       
@@ -216,7 +227,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					    i+37);
       
       fListCathodes.push_back("Cathode_"+std::to_string( (j+2)*100+(i+12)) );
-      
+      MassMap["Cathodes"]+=logicCathode->GetMass();
       //std::cout << "Cathode index: " << "Cathode_"+std::to_string( (j+2)*100+(i+12) ) << "\n";
       
     }
@@ -268,7 +279,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					    );
 	
 	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+1));
-	
+	MassMap["GEMs"]+=logicGEM->GetMass(); 
 	//std::cout << "North GEM: " << (i+13)*100+j*10+k+1 << "\n";
 
       }//chiudo for su k
@@ -293,7 +304,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					     );
 	
 	fListGEMs.push_back("GEM_"+std::to_string((i+13)*100+j*10+k+4 ));
-	
+	MassMap["GEMs"]+=logicGEM->GetMass();  
 	//std::cout << "South GEM: " << (i+13)*100+j*10+k+4 << "\n"; 
       }//chiudo for su j
 
@@ -354,7 +365,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					     );
 	
 	fListRings.push_back("Ring_"+std::to_string( (i+13)*1000+(j+10)*10+k+1) );
-
+	MassMap["Rings"]+=logicRing->GetMass();  
 	//std::cout << "Nord Rings: " << (i+13)*1000+(j+10)*10+k+1 << "\n";
 	
       }//chiudo for k 
@@ -376,7 +387,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					      );
       
 	fListRings.push_back("Ring_"+std::to_string( (i+13)*1000+(j+10)*10+k+4) );
-	
+	MassMap["Rings"]+=logicRing->GetMass(); 
 	//std::cout << "South Rings: " << (i+13)*1000+(j+10)*10+k+4 << "\n"; 
 
       }//chiudo for k
@@ -394,10 +405,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double VesselSize_y_outer = (CathodeSize_y/2 + (+CathodeSize_y + detectorSpace) + 2*Vesselwidth);
   G4double VesselSize_z_outer = (GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z+ 2*Vesselwidth);
 
+  //G4cout << G4BestUnit(2*VesselSize_x_outer,"Length") << "\t" << G4BestUnit(2*VesselSize_y_outer,"Length") << "\t" <<G4BestUnit(2*VesselSize_z_outer,"Length") << G4endl;
+  
   G4double VesselSize_x_inner = VesselSize_x_outer-Vesselwidth;
   G4double VesselSize_y_inner = VesselSize_y_outer-Vesselwidth;
   G4double VesselSize_z_inner = VesselSize_z_outer-Vesselwidth;
 
+  //G4cout << G4BestUnit(2*VesselSize_x_inner,"Length") << "\t" << G4BestUnit(2*VesselSize_y_inner,"Length") << "\t" <<G4BestUnit(2*VesselSize_z_inner,"Length") << G4endl;
+  
   G4Colour VesselColor(1,1,1,0.1);
   G4VisAttributes* VesselVisAttributes = new G4VisAttributes(VesselColor);
   VesselVisAttributes->SetForceSolid(true);
@@ -432,6 +447,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 				    0
 				    );
 
+  MassMap["Vessel"]+=logicVessel->GetMass();
+  
   //
   //Camera lenses
   //
@@ -468,7 +485,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					    );
 
 	fListLens.push_back("Lens_"+std::to_string((i+13)*1000+(j+1)*10+(k+0.5)));
-	
+	MassMap["Lens"]+=logicLens->GetMass(); 
       }//chiudo for k
       
     }//chiudo for j
@@ -487,7 +504,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					    );
 
 	fListLens.push_back("Lens_"+std::to_string((i+13)*1000+(j+1+4)*10+(k+0.5)));
-	
+	MassMap["Lens"]+=logicLens->GetMass(); 
       }//chiudo for k
       
     }//chiudo for j
@@ -534,7 +551,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					    );
 
 	fListSensors.push_back("Sensor_"+std::to_string((i+13)*1000+(j+1)*10+(k+0.5)));
-	
+	MassMap["Sensors"]+=logicSensor->GetMass(); 
       }//chiudo for k
       
     }//chiudo for j
@@ -553,7 +570,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					    );
 
 	fListSensors.push_back("Sensor_"+std::to_string((i+13)*1000+(j+1+4)*10+(k+0.5)));
-	
+	MassMap["Sensors"]+=logicSensor->GetMass();
       }//chiudo for k
       
     }//chiudo for j
@@ -596,7 +613,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
       fListDetector.push_back("GasVolume_"+std::to_string(counter));
 
-      G4cout  << "detN " << counter << "\t coord " << i*(CathodeSize_x+detectorSpace)  << " " <<j*(CathodeSize_y+detectorSpace) << " " << GEMDistanceFromCathode/2<< "\n";
+      //G4cout  << "detN " << counter << "\t coord " << i*(CathodeSize_x+detectorSpace)  << " " <<j*(CathodeSize_y+detectorSpace) << " " << GEMDistanceFromCathode/2<< "\n";
 
       counter++;
 
@@ -618,7 +635,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       
       fListDetector.push_back("GasVolume_"+std::to_string(counter));
 
-      G4cout  << "detN " << counter << "\t coord " << i*(CathodeSize_x+detectorSpace)  << " " <<j*(CathodeSize_y+detectorSpace) << " " << -GEMDistanceFromCathode/2<< "\n";
+      //G4cout  << "detN " << counter << "\t coord " << i*(CathodeSize_x+detectorSpace)  << " " <<j*(CathodeSize_y+detectorSpace) << " " << -GEMDistanceFromCathode/2<< "\n";
       
       counter++;
 
@@ -631,7 +648,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   fPhysVolStore = G4PhysicalVolumeStore::GetInstance();
   
-  
+  for (auto& el: MassMap) {
+    std::cout << "Mass of: " << el.first << " = " << G4BestUnit(el.second,"Mass") << "\n";
+  }
   //
   //always return the physical World
   //  
