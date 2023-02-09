@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <map>
 #include "TFile.h"
 #include "TTree.h"
 #include "TH1D.h"
@@ -27,8 +28,8 @@ std::map<std::string, std::map<std::string, double >> NEvents = {
   {"Cathodes",  { {"U238",1e6},                 {"U234",1e6}                                                              } },
   {"Sensors",   { {"U238",1e7}, {"Th232",1e7},               {"U235",1e7},   {"K40",1e7},                 {"Cs137",1e7}   } }
 };  // call Contaminant["Cat"]["U238"]
-
 */
+
 //creating now fake testing maps
 
 std::map<std::string,double> ElementMass ={ {"Cathodes",0.145746}, {"GEMs",193.536}, {"Rings",1114.74},  };
@@ -77,7 +78,12 @@ int main(){
   std::vector<TH1D*> Histo;
   std::vector<TH1D*> HistoCut;
 
+  std::map<double_t,TH1D*> IntegralMap;
+  std::map<double_t,TH1D*> IntegralMap_cut;
+  
   Double_t totEdep=0;
+
+  Int_t counter=0;
   
   for(auto& component: ElementMass){ //for components in the map Element Mass
     for(auto& val : Contaminant[component.first]){// for val (that ia map) that get for each detector component the map with <nuclide,contamination>  
@@ -125,7 +131,7 @@ int main(){
 	
 	
       }//tree over entries
-
+      
       temp_histo->Sumw2();
       temp_histocut->Sumw2();
       
@@ -134,8 +140,16 @@ int main(){
 
       Histo.push_back(temp_histo);
       HistoCut.push_back(temp_histocut);
+
+      Histo[Histo.size()-1]->SetMarkerColor(30+counter);
+      HistoCut[HistoCut.size()-1]->SetMarkerColor(30+counter);
       
-                  
+      //IntegralMap[temp_histo->Integral()] = Histo[Histo.size()-1];
+      //IntegralMap_cut[temp_histo->Integral()] = HistoCut[Histo.size()-1];
+
+      IntegralMap.insert({temp_histo->Integral(),Histo[Histo.size()-1]});
+      IntegralMap_cut.insert({temp_histocut->Integral(),HistoCut[HistoCut.size()-1]});
+      counter++;
     }// for on contaminant map with access to the element
   }//for on mass element
 
@@ -145,24 +159,27 @@ int main(){
   TFile* outDef = new TFile("NormalizedHisto.root","recreate");
   outDef->cd();
 
-  for(int i=0;i<Histo.size();i++){
-    Histo[i]->SetMarkerColor(30+i);
-    Histo[i]->SetLineColor(30+i);
-    Histo[i]->Write();
-    Hstack->Add(Histo[i]);
-
-    HistoCut[i]->SetMarkerColor(30+i);
-    HistoCut[i]->SetLineColor(30+i);
-    HistoCut[i]->Write();
-    Hstack_cut->Add(HistoCut[i]);
+  counter=0;
+  
+  for( std::map<double_t,TH1D*>::iterator i = IntegralMap.begin(); i != IntegralMap.end(); i++ ){
+    Histo[counter]->Write();
+    Hstack->Add(i->second);
+    counter++;
   }
 
+  counter=0;
+  
+  for( std::map<double_t,TH1D*>::iterator i = IntegralMap_cut.begin(); i != IntegralMap_cut.end(); i++ ){
+    HistoCut[counter]->Write();    
+    Hstack_cut->Add(i->second);
+    counter++;
+  }
+  
   Hstack->Write();
   Hstack_cut->Write();
   
   outDef->Save();
   outDef->Close();
-  
   
 }
 

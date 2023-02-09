@@ -327,7 +327,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4int NRings = 32;
   
   G4double ringspacing = (GEMDistanceFromCathode-NRings*Ring_z)/(NRings+1);
-
+  
   fRingWidth=Ring_width;
   
   G4Box*
