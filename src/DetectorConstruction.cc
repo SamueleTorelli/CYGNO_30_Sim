@@ -193,7 +193,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4double CathodeSize_x = 50*cm;
   G4double CathodeSize_y = 80*cm;
-  G4double CathodeSize_z = 0.0009*mm;
+  G4double CathodeSize_z = 0.5*cm;
 
   fCathodeWidth=CathodeSize_z;
   
@@ -270,7 +270,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       for(G4int k=-1;k<2;k++){
 	
 	fPhysicGEMsPlus = new G4PVPlacement(0,
-					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),GEMDistanceFromCathode+j*GEMGap),
+					    G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),CathodeSize_z/2+GEMDistanceFromCathode+j*GEMGap),
 					    logicGEM,
 					    "GEM_"+std::to_string((i+13)*100+j*10+k+1),
 					    logicWorld,
@@ -295,7 +295,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       for(G4int k=-1;k<2;k++){
 	
 	fPhysicGEMsMinus = new G4PVPlacement(0,
-					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*GEMDistanceFromCathode+j*GEMGap),
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*(CathodeSize_z/2+GEMDistanceFromCathode)+j*GEMGap),
 					     logicGEM,
 					     "GEM_"+std::to_string((i+13)*100+j*10+k+4 ),
 					     logicWorld,
@@ -403,7 +403,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4double VesselSize_x_outer = (CathodeSize_x/2 + 12*(+CathodeSize_x + detectorSpace) + 2*Vesselwidth);
   G4double VesselSize_y_outer = (CathodeSize_y/2 + (+CathodeSize_y + detectorSpace) + 2*Vesselwidth);
-  G4double VesselSize_z_outer = (GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z+ 2*Vesselwidth);
+  G4double VesselSize_z_outer = (CathodeSize_z/2+GEMDistanceFromCathode+2*GEMGap+3*GEMSize_z+ 2*Vesselwidth);
 
   //G4cout << G4BestUnit(2*VesselSize_x_outer,"Length") << "\t" << G4BestUnit(2*VesselSize_y_outer,"Length") << "\t" <<G4BestUnit(2*VesselSize_z_outer,"Length") << G4endl;
   
@@ -588,7 +588,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* GasVisAttributes = new G4VisAttributes(GasColor);
   GasVisAttributes->SetForceSolid(true);
   
-  G4Box* solidGasVolume = new G4Box("GasVolume",CathodeSize_x/2,CathodeSize_y/2,(GEMDistanceFromCathode-CathodeSize_z)/2);
+  G4Box* solidGasVolume = new G4Box("GasVolume",CathodeSize_x/2,CathodeSize_y/2,(GEMDistanceFromCathode)/2);
 
   fLogicalGasVolume = new G4LogicalVolume(solidGasVolume,
 					  CYGNO_gas,
@@ -603,7 +603,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     for(G4int j=-1;j<2;j++){
       
       G4VPhysicalVolume* GasVolumePlus = new G4PVPlacement(0,
-							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),GEMDistanceFromCathode/2),
+							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),CathodeSize_z/2+GEMDistanceFromCathode/2),
 							   fLogicalGasVolume,
 							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
@@ -625,7 +625,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     for(G4int j=-1;j<2;j++){
       
       G4VPhysicalVolume* GasVolumeMinus = new G4PVPlacement(0,
-							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-GEMDistanceFromCathode/2),
+							    G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-(CathodeSize_z/2+GEMDistanceFromCathode/2)),
 							   fLogicalGasVolume,
 							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
