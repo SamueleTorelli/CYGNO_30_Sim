@@ -38,6 +38,7 @@
 #include "G4SteppingVerbose.hh"
 #include "Randomize.hh"
 #include "G4EmStandardPhysics.hh"
+#include "G4RadioactiveDecayPhysics.hh"
 
 #include "DetectorConstruction.hh"
 #include "PhysicsList.hh"
@@ -55,7 +56,8 @@ int main(int argc,char** argv) {
 
   //choose the Random engine
   CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
-
+  CLHEP::HepRandom::setTheSeed(time(0));
+  
   //use G4SteppingVerboseWithUnits
   G4int precision = 1;
   G4SteppingVerbose::UseBestUnit(precision);
@@ -64,7 +66,8 @@ int main(int argc,char** argv) {
   auto runManager = G4RunManagerFactory::CreateRunManager();  
 
   runManager->SetNumberOfThreads(1);
-
+  //runManager->SetVerboseLevel(0);
+  
   if (argc==3) {
     G4int nThreads = G4UIcommand::ConvertToInt(argv[2]);
     runManager->SetNumberOfThreads(4);
@@ -79,11 +82,17 @@ int main(int argc,char** argv) {
   runManager->SetUserInitialization(theDetector);
 
   G4PhysListFactory factory;
+
+  /*
   G4VModularPhysicsList* physicsList = factory.GetReferencePhysList("FTFP_BERT_HP");
   physicsList->SetVerboseLevel(0);
-  G4EmStandardPhysics* emPhysics = new G4EmStandardPhysics();
-  physicsList->RegisterPhysics(emPhysics);
+  */
   
+  
+  G4VModularPhysicsList* physicsList = factory.GetReferencePhysList("QGSP_BIC_EMZ");
+  physicsList->SetVerboseLevel(0);
+  physicsList->RegisterPhysics(new G4RadioactiveDecayPhysics); 
+
   runManager->SetUserInitialization(physicsList);
 
   runManager->SetUserInitialization(new ActionInitialization(theDetector));

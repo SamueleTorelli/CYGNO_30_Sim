@@ -10,24 +10,16 @@
 
 //These are the real maps
 
-std::map<std::string,double> ElementMass ={ {"Cathodes",809.7}, {"GEMs",18.75}, {"Lens",0.4995}, {"Rings",1114.74}, {"Sensors",0.1392}, {"Vessel",1102.24}  }; // in kilograms
+std::map<std::string,double> ElementMass ={ {"GEMs",18.75}  }; // in kilograms
 
 std::map<std::string, std::map<std::string, double >> Contaminant = {  
-  {"GEMs",          { {"U238",1.32e-2}, {"Th232",5.45e-3},                    {"U235",2.8e-2},  {"K40",6.31e-2},  {"Co60",2.34e-3},  {"Cs137",1.56e-3}   } },
-  {"Lens",          { {"U238",1.23e-4}, {"Th232",4.07e-5},                                      {"K40",3.1e-4}                                           } },
-  {"Vessel",        { {"U238",2.96e-4}, {"Th232",5.69e-5},                                      {"K40",7.12e-5}                                          } },
-  {"Rings",         { {"U238",1.2e-5 }, {"Th232",4.1e-6},                                       {"K40",6.1e-5},   {"Co60",2.4e-4},   {"Cs137",2.9e-4}    } },
-  {"Cathodes",      { {"U238",1.2e-5 }, {"Th232",4.1e-6},                                       {"K40",6.1e-5},   {"Co60",2.4e-4},   {"Cs137",2.9e-4}    } },
-  {"Sensors",       { {"U238",6.8e-3},  {"Th232",5.20e-3},                    {"U235",9.1e-4},  {"K40",3.5},                         {"Cs137",4.2e-4}    } }
+  {"GEMs",          {  {"Th232",5.45e-3}  } },
+  
 };  // call Contaminant["Cat"]["U238"]
 
 std::map<std::string, std::map<std::string, double >> NEvents = {  
-  {"GEMs",      { {"U238",1e6}, {"Th232",1e6},               {"U235",1e6},   {"K40",1e7},  {"Co60",1e7},  {"Cs137",1e7}   } },
-  {"Lens",      { {"U238",1e6}, {"Th232",1e6},                               {"K40",1e6}                                  } },
-  {"Vessel",    { {"U238",1e7}, {"Th232",1e7},                               {"K40",1e7}                                  } },
-  {"Rings",     { {"U238",1e6}, {"Th232",1e6},                               {"K40",1e7},  {"Co60",1e7},  {"Cs137",1e7}   } },
-  {"Cathodes",  { {"U238",1e6}, {"Th232",1e6},                               {"K40",1e7},  {"Co60",1e7},  {"Cs137",1e7}   } },
-  {"Sensors",   { {"U238",1e7}, {"Th232",1e7},               {"U235",1e7},   {"K40",1e7},                 {"Cs137",1e7}   } }
+  {"GEMs",      {  {"Th232",1e5} } },
+  
 };  // call Contaminant["Cat"]["U238"]
 
 
@@ -120,8 +112,8 @@ int main(){
       tree->SetBranchAddress("Y_Vertex",&Y_Vertex);
       tree->SetBranchAddress("Z_Vertex",&Z_Vertex);
 
-      temp_histo = new TH1D(Form("%s_%s",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s",(component.first).c_str(), (val.first).c_str() ),900,0,2000);
-      temp_histocut = new TH1D(Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ),900,0,2000);
+      temp_histo = new TH1D(Form("%s_%s",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s",(component.first).c_str(), (val.first).c_str() ),1200,0,2000);
+      temp_histocut = new TH1D(Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ),1200,0,2000);
       
       for(int i=0;i< tree->GetEntries();i++){
 	tree->GetEntry(i);

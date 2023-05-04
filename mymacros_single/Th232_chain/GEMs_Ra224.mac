@@ -2,9 +2,9 @@
 /run/verbose 0
 /event/verbose 0
 /random/setSeeds 575223199 8381234975
-/output/OutFile GEMs_Th232
+/output/OutFile GEMs_Ra224
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
 /detector/RadElement GEMs
-/isotope/AtomicNumber 90
-/isotope/MassNumber 232
+/isotope/AtomicNumber 88
+/isotope/MassNumber 224
 /run/beamOn 100000

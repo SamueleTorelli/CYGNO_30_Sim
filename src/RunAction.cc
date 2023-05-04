@@ -50,7 +50,7 @@ RunAction::RunAction(PrimaryGeneratorAction* kin)
   fRunMessenger = new G4GenericMessenger(this, "/output/","Output file");
   fRunMessenger->DeclareProperty("OutFile", fOutFileName, "Output file name");
 
-  fOutFileName="output";
+  fOutFileName="outfiles_V2";
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -81,7 +81,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
   //
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   //if ( analysisManager->IsActive() ) {
-  analysisManager->OpenFile("outfiles/"+fOutFileName+".root");
+  analysisManager->OpenFile("outfiles_V2/"+fOutFileName+".root");
     //}
 
   analysisManager->CreateNtuple("Hits","Hits");

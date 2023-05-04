@@ -67,6 +67,7 @@ int main(int argc, char** argv){
   tree->GetEntry(0);
   Out_Nucl=Nucleus;
   Out_Process = CreationProcess;
+  Out_evNumber = Evn;
   
   for(int i=0;i<Nentries;i++){
     tree->GetEntry(i);
@@ -74,11 +75,11 @@ int main(int argc, char** argv){
     if(i%10000==0) std::cout << i <<"/" << Nentries << "\n";
     
     if(strcmp(ParticleName,"e-")!=0 && strcmp(ParticleName,"e+")!=0 && strcmp(ParticleName,"alpha")!=0){
-      
+  
       continue;
 
       //check the phot creation process
-    }else if( strcmp(CreationProcess,Out_Process.c_str())==0  &&  strcmp(Nucleus,Out_Nucl.c_str())==0  &&  flag == 0 ){
+    }else if( strcmp(CreationProcess,Out_Process.c_str())==0  &&  strcmp(Nucleus,Out_Nucl.c_str())==0  &&  flag == 0 && Out_evNumber == Evn){
 
       Out_evNumber = Evn;
       Out_PartName = ParticleName;
@@ -94,7 +95,7 @@ int main(int argc, char** argv){
 	EVolumeMap[VolumeNumber]+=EnergyDeposit;
       }
       
-    }else if( (strcmp(CreationProcess,"ionIoni")==0 || strcmp(CreationProcess,"eIoni")==0) ){
+    }else if( ((strcmp(CreationProcess,"ionIoni")==0 || strcmp(CreationProcess,"eIoni")==0)) ){
       
       flag=1;
       

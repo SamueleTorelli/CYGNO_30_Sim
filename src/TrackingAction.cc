@@ -110,7 +110,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   if (fCharge > 2.) {
     //build decay chain
     if (ID == 1) fEvent->AddDecayChain(name);
-      else       fEvent->AddDecayChain(" ---> " + name);
+    else       fEvent->AddDecayChain(" ---> " + name);
     //
     //G4cout << "here in tracking action " << fEvent  << " set to " << name <<G4endl;
     fEvent->SetLastDecay(name);
@@ -118,9 +118,11 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     fDetector->GetSensitiveDetector()->SetLastDecay(name);
     //full chain: put at rest; if not: kill secondary      
     G4Track* tr = (G4Track*) track;
-    if (fFullChain) { tr->SetKineticEnergy(0.);
-                      tr->SetTrackStatus(fStopButAlive);}
-      else if (ID>1) tr->SetTrackStatus(fStopAndKill);
+    if (fFullChain) {
+      tr->SetKineticEnergy(0.);
+      tr->SetTrackStatus(fStopButAlive);
+    }
+    else if (ID>1) tr->SetTrackStatus(fStopAndKill);
     //
     fTime_birth = track->GetGlobalTime();
   }
@@ -156,6 +158,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
   //
   const std::vector<const G4Track*>* secondaries 
                               = track->GetStep()->GetSecondaryInCurrentStep();
+  
   size_t nbtrk = (*secondaries).size();
   if (nbtrk) {
     //there are secondaries --> it is a decay
