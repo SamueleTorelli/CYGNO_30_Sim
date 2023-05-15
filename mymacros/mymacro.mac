@@ -3,13 +3,13 @@
 /event/verbose 0
 
 #/random/setSeeds 575223199 8381234975
-/output/OutFile GEMs_Th232
+/output/OutFile GEMs_U235
 
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
 /detector/RadElement GEMs
 
-/isotope/AtomicNumber 90
-/isotope/MassNumber 232
+/isotope/AtomicNumber 92
+/isotope/MassNumber 235
 
 
 /run/beamOn 100000

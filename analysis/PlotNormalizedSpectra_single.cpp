@@ -111,8 +111,8 @@ int main(){
       tree->SetBranchAddress("Y_Vertex",&Y_Vertex);
       tree->SetBranchAddress("Z_Vertex",&Z_Vertex);
 
-      temp_histo = new TH1D(Form("%s_%s",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s",(component.first).c_str(), (val.first).c_str() ),900,0,2000);
-      temp_histocut = new TH1D(Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ),900,0,2000);
+      temp_histo = new TH1D(Form("%s_%s",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s",(component.first).c_str(), (val.first).c_str() ),1200,0,2000);
+      temp_histocut = new TH1D(Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ), Form("%s_%s_cut",(component.first).c_str(), (val.first).c_str() ),1200,0,2000);
       
       for(int i=0;i< tree->GetEntries();i++){
 	tree->GetEntry(i);

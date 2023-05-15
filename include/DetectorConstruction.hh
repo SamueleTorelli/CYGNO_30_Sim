@@ -65,7 +65,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* GetVessel() {return fPhysicVessel;} 
 
   G4double GetCathodeWidth() {return fCathodeWidth;}
-  G4double GetGEMWidth() {return fGEMWidth;}
+  G4double GetGEMOuterWidth() {return fGEMOuterWidth;}
+  G4double GetGEMInnerWidth() {return fGEMCoreWidth;}
   G4double GetRingWidth() {return fRingWidth;}
   G4double GetLensWidth() {return fLensWidth;}
   G4double GetSensorWidth() {return fSensorWidth;}
@@ -74,7 +75,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4PhysicalVolumeStore* GetVolumeStored() {return fPhysVolStore;}
 
   std::vector<G4String> GetCathodesList() {return fListCathodes;}
-  std::vector<G4String> GetGEMsLists() {return fListGEMs;}
+  std::vector<G4String> GetGEMsOuterLists() {return fListGEMsOuter;}
+  std::vector<G4String> GetGEMsInnerLists() {return fListGEMsCore;}
   std::vector<G4String> GetRingsList() {return fListRings;}
   std::vector<G4String> GetLensList() {return fListLens;}
   std::vector<G4String> GetSensorsList() {return fListSensors;}
@@ -88,14 +90,16 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4double fWorldSize_z;
 
   G4double fCathodeWidth;
-  G4double fGEMWidth;
+  G4double fGEMOuterWidth;
+  G4double fGEMCoreWidth;
   G4double fRingWidth;
   G4double fLensWidth;
   G4double fSensorWidth;
   G4double fVesselWidth;
   
   std::vector<G4String> fListCathodes;
-  std::vector<G4String> fListGEMs;
+  std::vector<G4String> fListGEMsOuter;
+  std::vector<G4String> fListGEMsCore;
   std::vector<G4String> fListRings;
   std::vector<G4String> fListLens;
   std::vector<G4String> fListSensors;
@@ -104,6 +108,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* fPhysicalCathodes;
   G4VPhysicalVolume* fPhysicGEMsPlus;
   G4VPhysicalVolume* fPhysicGEMsMinus;
+  G4VPhysicalVolume* fPhysicGEMsCorePlus;
+  G4VPhysicalVolume* fPhysicGEMsCoreMinus;
   G4VPhysicalVolume* fPhysicRingsPlus;
   G4VPhysicalVolume* fPhysicRingsMinus;
   G4VPhysicalVolume* fPhysicVessel;

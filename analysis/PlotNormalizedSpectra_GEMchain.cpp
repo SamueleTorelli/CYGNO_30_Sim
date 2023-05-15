@@ -13,12 +13,12 @@
 std::map<std::string,double> ElementMass ={ {"GEMs",18.75}  }; // in kilograms
 
 std::map<std::string, std::map<std::string, double >> Contaminant = {  
-  {"GEMs",          {  {"Th232",5.45e-3}  } },
+  {"GEMs",          {  {"U235",5.45e-3}  } },
   
 };  // call Contaminant["Cat"]["U238"]
 
 std::map<std::string, std::map<std::string, double >> NEvents = {  
-  {"GEMs",      {  {"Th232",1e5} } },
+  {"GEMs",      {  {"U235",1e5} } },
   
 };  // call Contaminant["Cat"]["U238"]
 

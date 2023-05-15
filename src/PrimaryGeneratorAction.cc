@@ -109,9 +109,12 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
   if(El == "Cathodes"){
     Elements = fDetector->GetCathodesList();
     width = fDetector->GetCathodeWidth();
-  } else if (El == "GEMs"){
-    Elements = fDetector->GetGEMsLists();
-    width = fDetector->GetGEMWidth();
+  } else if (El == "GEMsOuter"){
+    Elements = fDetector->GetGEMsOuterLists();
+    width = fDetector->GetGEMOuterWidth();
+  } else if (El == "GEMsCore"){
+    Elements = fDetector->GetGEMsInnerLists();
+    width = fDetector->GetGEMInnerWidth();
   } else if (El == "Rings"){
     Elements = fDetector->GetRingsList();
     width = fDetector->GetRingWidth();
