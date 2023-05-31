@@ -59,7 +59,8 @@ DetectorConstruction::DetectorConstruction():G4VUserDetectorConstruction()
   fListCathodes.clear();
   fListGEMsOuter.clear();
   fListGEMsCore.clear();
-  fListRings.clear();
+  fListSupportRings.clear();
+  fListRingStrips.clear();
   fListLens.clear();
   fListSensors.clear();
 }
@@ -160,7 +161,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   std::map<G4String,G4double> MassMap={
     {"Cathodes",0},
-    {"Rings",0},
+    {"SupportRings",0},
+    {"RingStrips",0},
     {"GEMsOuter",0},
     {"GEMsCore",0},
     {"Vessel",0},
@@ -199,8 +201,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   fCathodeWidth=CathodeSize_z;
   
-  G4Colour AlColor(0.69, 0.77, 1.00);
-  G4VisAttributes* cathodeVisAttributes = new G4VisAttributes(AlColor);
+  G4Colour CathodeColor(0.6, 0.4, 0.2,0.3);
+  G4VisAttributes* cathodeVisAttributes = new G4VisAttributes(CathodeColor);
   cathodeVisAttributes->SetForceSolid(true);
 
   
@@ -241,11 +243,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   G4double GEMOuterSize_x = 50*cm;
   G4double GEMOuterSize_y = 80*cm;
-  G4double GEMOuterSize_z = 0.06*mm;
+  G4double GEMOuterSize_z = 0.05*mm;
 
   G4double GEMCoreSize_xSub = 50.01*cm;
   G4double GEMCoreSize_ySub = 80.01*cm;
-  G4double GEMCoreSize_zSub = 0.03*mm;
+  G4double GEMCoreSize_zSub = 0.005*mm;
 
   G4double GEMGap = 0.2*cm;
   G4double GEMDistanceFromCathode = 50*cm;
@@ -253,7 +255,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   fGEMOuterWidth = (GEMOuterSize_z-GEMCoreSize_zSub)/2;
 
-  G4Colour CuColor(0.45,0.25,0.0,0.9);
+  G4Colour CuColor(0.45,0.25,0.0,0.1);
   G4VisAttributes* GEMVisAttributes = new G4VisAttributes(CuColor);
   GEMVisAttributes->SetForceSolid(true);
   
@@ -421,6 +423,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //Field ring
   //
 
+  /*
+  
   G4Colour CaptonColor(0.2,1.0,0.0,0.2);
   G4VisAttributes* RingsVisAttributes = new G4VisAttributes(CaptonColor);
   RingsVisAttributes->SetForceSolid(true);
@@ -441,7 +445,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4Box*
     innerShapeRing = new G4Box("RingOuterShape",
 			 GEMOuterSize_x/2-Ring_width/2,GEMOuterSize_y/2-Ring_width/2,Ring_z/2+0.3*cm);
-  
+			 
   G4VSolid* solidRing =
     new G4SubtractionSolid("Ring",outerShapeRing,innerShapeRing);
   
@@ -497,6 +501,169 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       }//chiudo for k
     }//chiudo for j
   }
+
+  */
+
+
+  //
+  //RingSupport
+  //
+
+  G4Colour SupportRingColor(1.0,1.0,0.0,0.4);
+  G4VisAttributes* SupportRingsVisAttributes = new G4VisAttributes(SupportRingColor);
+  SupportRingsVisAttributes->SetForceSolid(true);
+  
+  G4double RingSupportWidth = 0.075*mm;
+  G4double RingStripWidth = 0.035*mm;
+
+  fRingSupportWidth=RingSupportWidth;
+  
+  G4Box*
+    outerRingSupport = new G4Box("outerRingSupport",
+				 (GEMOuterSize_x+RingSupportWidth+RingStripWidth)/2,(GEMOuterSize_y+RingSupportWidth+RingStripWidth)/2,GEMDistanceFromCathode/2);
+
+  G4Box*
+    innerRingSupport = new G4Box("innerRingSupport",
+				 (GEMOuterSize_x+RingStripWidth)/2,(GEMOuterSize_y+RingStripWidth)/2,GEMDistanceFromCathode/2+0.5*cm);
+
+  
+
+  G4VSolid* solidRingSupport =
+    new G4SubtractionSolid("solidRingSupport",outerRingSupport,innerRingSupport);
+  
+  G4LogicalVolume*
+    logicRingSupport = new G4LogicalVolume(solidRingSupport,
+					   PMMA,
+					   "RingSupport");
+  
+  logicRingSupport->SetVisAttributes(SupportRingsVisAttributes);
+  
+  for(G4int i=-12;i<13;i++){  
+    for(G4int j=-1;j<2;j++){
+      
+      fPhysicRingsSupportPlus = new G4PVPlacement(0,
+						  G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),CathodeSize_z/2+GEMDistanceFromCathode/2),
+						  logicRingSupport,
+						  "RingSupport_"+std::to_string((j+2)*100+(i+12)),
+						  logicWorld,
+						  false,
+						  (j+2)*100+(i+12)
+						  );
+      
+      fListSupportRings.push_back("RingSupport_"+std::to_string((j+2)*100+(i+12)));
+      MassMap["SupportRings"]+=logicRingSupport->GetMass();
+            
+    }//chiudo for j
+  }//chiudo for i
+
+  for(G4int i=-12;i<13;i++){  
+    for(G4int j=-1;j<2;j++){
+      
+      fPhysicRingsSupportMinus = new G4PVPlacement(0,
+						   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-1*(CathodeSize_z/2+GEMDistanceFromCathode/2)),
+						  logicRingSupport,
+						  "RingSupport_"+std::to_string((j+6)*100+(i+12)),
+						  logicWorld,
+						  false,
+						  (j+6)*100+(i+12)
+						  );
+      
+      fListSupportRings.push_back("RingSupport_"+std::to_string((j+6)*100+(i+12)));
+      MassMap["SupportRings"]+=logicRingSupport->GetMass();
+            
+    }//chiudo for j
+  }//chiudo for i
+
+
+
+  
+
+
+  
+
+  //
+  //RingStrip
+  //
+
+  G4double Ring_z = 5.5*cm; //depth of the ring in Z
+  G4int NRings = 4;
+  
+  G4double RingSpacing = (GEMDistanceFromCathode-NRings*Ring_z)/(NRings+1);
+
+  fRingStripWidth=RingStripWidth;
+  
+  G4Box*
+    outerRingStrip = new G4Box("outerRingStrip",
+				 (GEMOuterSize_x+RingStripWidth)/2,(GEMOuterSize_y+RingStripWidth)/2,Ring_z/2);
+
+  G4Box*
+    innerRingStrip = new G4Box("innerRingStrip",
+				 (GEMOuterSize_x)/2,(GEMOuterSize_y)/2,Ring_z/2+0.5*cm);
+
+
+  G4VSolid* solidRingStrip =
+    new G4SubtractionSolid("solidRingStrip",outerRingStrip,innerRingStrip,0, G4ThreeVector(-RingStripWidth/2,-RingStripWidth/2,0) );
+  
+  G4LogicalVolume*
+    logicRingStrip = new G4LogicalVolume(solidRingStrip,
+					   Copper,
+					   "RingStrip");
+  
+  logicRingStrip->SetVisAttributes(GEMVisAttributes);
+  
+  for(G4int i=-12;i<13;i++){
+    
+    for(G4int j=0;j<NRings;j++){
+      
+      //Rings on positive side of z axis
+      for(G4int k=-1;k<2;k++){
+	
+	fPhysicRingStripsPlus = new G4PVPlacement(0,
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),(j+1)*RingSpacing+0.5*Ring_z+j*Ring_z),
+					     logicRingStrip,
+					     "RingStrip_"+std::to_string((i+13)*1000+(j+10)*10+k+1),
+					     logicWorld,
+					     false,
+					     (i+13)*1000+(j+10)*10+k+1
+					     );
+	
+	fListRingStrips.push_back("RingStrip_"+std::to_string( (i+13)*1000+(j+10)*10+k+1) );
+	MassMap["RingStrips"]+=logicRingStrip->GetMass();  
+	
+	
+      }//chiudo for k 
+    }//chiudo for j
+
+    for(G4int j=0;j<NRings;j++){
+      
+      for(G4int k=-1;k<2;k++){ 
+
+	fPhysicRingStripsMinus = new G4PVPlacement(0,
+					      G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace),-1*((j+1)*RingSpacing+0.5*Ring_z+j*Ring_z)),
+					      logicRingStrip,
+					      "RingStrip_"+std::to_string((i+13)*1000+(j+10)*10+k+4),
+					      logicWorld,
+					      false,
+					      (i+13)*1000+(j+10)*10+k+4
+					      );
+      
+	fListRingStrips.push_back("RingStrip_"+std::to_string( (i+13)*1000+(j+10)*10+k+4) );
+	MassMap["RingStrips"]+=logicRingStrip->GetMass(); 
+	//std::cout << "South Rings: " << (i+13)*1000+(j+10)*10+k+4 << "\n"; 
+
+      }//chiudo for k
+    }//chiudo for j
+
+    
+  }//chiudo for i
+
+ 
+  //Rings on positive side of z axis
+
+
+  
+
+  
   
   
   //

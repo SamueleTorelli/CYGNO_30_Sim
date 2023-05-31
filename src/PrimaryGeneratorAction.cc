@@ -115,9 +115,12 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
   } else if (El == "GEMsCore"){
     Elements = fDetector->GetGEMsInnerLists();
     width = fDetector->GetGEMInnerWidth();
-  } else if (El == "Rings"){
-    Elements = fDetector->GetRingsList();
-    width = fDetector->GetRingWidth();
+  } else if (El == "RingSupports"){
+    Elements = fDetector->GetRingsSupportList();
+    width = fDetector->GetRingsSupportWidth();
+  } else if (El == "RingStrips"){
+    Elements = fDetector->GetRingStripstList();
+    width = fDetector->GetRingStripsWidth();
   } else if (El == "Vessel"){
     Elements.push_back("Vessel");
     width = fDetector->GetVesselWidth();

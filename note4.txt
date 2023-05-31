@@ -1,0 +1,76 @@
+Provare shielding di Rame come da CYGNO paper -> 1cm di Rame
+Mettere resistori SMD ultrapuri
+
+Fare simulazioni con lo Sn-90 con i collimatori all'INAF.
+
+
+
+---------------------------------------------------------------------------------
+
+
+
+Mettere anche DREAM dentro sottolineando i 6 mesi in lab.
+
+Sintetizzate il paragrafo della caratterizzazione del LYSO. Dicendo che ho contribuito al setup e alla definizione della strategia di analisi per le differenti quantità
+
+After the experience in CMS... Ho deciso di applicare al GSSI (Centro internazionale di eccellenza) e ho vinto xk volevo fare CYGNO.
+
+Dire che CYGNO fa directional searches for rare events quando lo introduco.
+
+Head-tail->Sense direction.
+
+O(keV) energy for both electrons and nuclear recoil.
+
+Dire che ho contribuito ad aprire una nuova linea di ricerca per CYGNO.
+
+Mettere che ho calcolato la rate a partire dal flusso di pp di Bachall
+
+
+
+
+Approccio innovativo (che non fa nessuno e per la prima volta lo sis sta facendo seriamente) sopra quello di Borexino -> Abbasso la sognia + spettroscopia 
+
+TPC->Come funzionano->La direzionalità (anceh per DM discrimination e segnatura)->Applicazione ai neutrini.
+
+
+
+I started calculating the rate!!!!
+
+studying the linearity and energy resolution on low energy electron recoil!!
+
+Ho sviluppato un maximum likelihood basato su RooFit per l'analisi dei dati.
+
+
+
+Ho sviluppato il MC xk mi servivano delle tracce di elettroni a bassa energia realistiche e con direzione nota. (data al difficoltà di un setup per la calibrazione del detector con tracce di direzione nota)
+ A partire da queste prevediamo nel breve futuro di applicare questa cosa anche alla polarimetria a raggi x nello spazio.
+
+
+All'inizio non spendo Che backround mi aspettavo ho fatto diverse ipotesi e ho dimostrato che si può fare...
+
+Sensitività con ~100kg\cdot y
+
+In parallel... not on the experimental side. (Dire cosa ci faccio con i negative ions e che faccio bassa diffusione) (dire che l'ho fatto per tre anni). Mettere anche che ho contribuito all'ttimizzazione dello stage di amplificazione e della miscela di GAS per diversi casi di fisica.
+
+Capacità in Simulazioni, analisi dati e R&D possono contribuire nell'R&D di MEG e nel miglioramento dell'analisis dei dati di MEG-II.
+
+
+
+
+____________________________________________________________
+
+Simmetria accidentale ci deve stare
+
+Dire che il campo magnetico fa si che e+
+
+Togliere "To study the detector response"
+
+Togliere l'equazione B_{acc} e descrivere a parole (meglio tenerla e descrivere)
+
+
+Vista la mia esperienza in simulation and analysis, and the capability of developing algorithms for particle tracking.
+
+
+L'E_{e} magari è dominata dal multiplo scattering della targhetta, mentre ancora c'è tanto da fare sulla direzione del gamma
+
+Conclusione di tutto, dire che ho imparato proprio a fare R&D in laboratorio (far funzionare un detector, mettere su un laboratorio, definire strategie di analisi e individuare le variabili di interesse...)
