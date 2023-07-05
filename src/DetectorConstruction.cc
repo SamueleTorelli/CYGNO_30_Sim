@@ -83,9 +83,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4Material* Air =
     nist->FindOrBuildMaterial("G4_AIR"); 
 
-  G4Material* Alluminium =
-    nist->FindOrBuildMaterial("G4_Al");
-
   G4Material* Copper =
     nist->FindOrBuildMaterial("G4_Cu");
 
@@ -115,6 +112,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4Material* PMMA = nist->ConstructNewMaterial("PMMA", elements, natoms, PMMADensity);
 
+  //
+  //definition of Al2O3
+  //
+
+  G4Element* elAl = nist->FindOrBuildElement("Al");
+  G4Element* elO = nist->FindOrBuildElement("O");
+  
+  G4Material* al2o3 = new G4Material("Al2O3", 3.97 * g/cm3, 2);
+  al2o3->AddElement(elAl, 2);
+  al2o3->AddElement(elO, 3);
+    
   //
   //defining sensor material
   //
@@ -163,6 +171,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     {"Cathodes",0},
     {"SupportRings",0},
     {"RingStrips",0},
+    {"Resistor",0},
     {"GEMsOuter",0},
     {"GEMsCore",0},
     {"Vessel",0},
@@ -212,12 +221,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4LogicalVolume*
     logicCathode = new G4LogicalVolume(solidCathode,
-				       Alluminium,
+				       Copper,
 				       "Cathode");
   
   logicCathode->SetVisAttributes(cathodeVisAttributes);
     
-  G4double detectorSpace = 0.3*cm;
+  G4double detectorSpace = 0.4*cm; // original 0.3*cm
 
   for(G4int i=-12;i<13;i++){
     for(G4int j=-1;j<2;j++){
@@ -413,14 +422,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 
 
-
-
-
-
-  
   
   //
-  //Field ring
+  //Old field ring
   //
 
   /*
@@ -658,10 +662,83 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   }//chiudo for i
 
  
-  //Rings on positive side of z axis
 
-
+  //
+  //SMD Resistors
+  //
   
+  G4double ResistorSize_x = 1.6*mm;
+  G4double ResistorSize_y = 0.55*mm;
+  G4double ResistorSize_z = 3.2*mm;
+
+  fResistorWidth=ResistorSize_y;
+  
+  G4Colour ResistorColor(0.0,0.0,0.0,0.3);
+  G4VisAttributes* ResistorVisAttributes = new G4VisAttributes(ResistorColor);
+  ResistorVisAttributes->SetForceSolid(true);
+  
+  G4Box*
+    solidResistor = new G4Box("resistorShape",
+			      ResistorSize_x/2,ResistorSize_y/2,ResistorSize_z/2);
+
+  G4LogicalVolume*
+    logicResistor = new G4LogicalVolume(solidResistor,
+					 al2o3,
+					 "Resistor");
+  
+
+  for(G4int i=-12;i<13;i++){
+    
+    for(G4int j=0;j<NRings+1;j++){
+      
+      //Rings on positive side of z axis
+      for(G4int k=-1;k<2;k++){
+	
+	fPhysicResistorsPlus = new G4PVPlacement(0,
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace)+CathodeSize_y/2+RingSupportWidth+RingStripWidth+ResistorSize_y/2,(j)*RingSpacing+0.5*Ring_z+j*Ring_z),
+					     logicResistor,
+					     "Resistor_"+std::to_string((i+13)*1000+(j+10)*10+k+1),
+					     logicWorld,
+					     false,
+					     (i+13)*1000+(j+10)*10+k+1
+					     );
+	
+	fListResistors.push_back("Resistor_"+std::to_string( (i+13)*1000+(j+10)*10+k+1) );
+	MassMap["Resistor"]+=logicRingStrip->GetMass();  
+	
+	
+      }//chiudo for k 
+    }//chiudo for j
+
+    for(G4int j=0;j<NRings+1;j++){
+      
+      for(G4int k=-1;k<2;k++){ 
+
+	fPhysicResistorsMinus = new G4PVPlacement(0,
+					      G4ThreeVector(i*(CathodeSize_x+detectorSpace),k*(CathodeSize_y+detectorSpace)+CathodeSize_y/2+RingSupportWidth+RingStripWidth+ResistorSize_y/2,-1*((j)*RingSpacing+0.5*Ring_z+j*Ring_z)),
+					      logicResistor,
+					      "Resistor_"+std::to_string((i+13)*1000+(j+10)*10+k+4),
+					      logicWorld,
+					      false,
+					      (i+13)*1000+(j+10)*10+k+4
+					      );
+      
+	fListResistors.push_back("Resistor_"+std::to_string( (i+13)*1000+(j+10)*10+k+4) );
+	MassMap["Resistors"]+=logicRingStrip->GetMass(); 
+	//std::cout << "South Rings: " << (i+13)*1000+(j+10)*10+k+4 << "\n"; 
+
+      }//chiudo for k
+    }//chiudo for j
+
+    
+  }//chiudo for i
+
+
+
+
+
+
+
 
   
   

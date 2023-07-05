@@ -121,6 +121,9 @@ G4ThreeVector PrimaryGeneratorAction::GetPointOnDetectorElement(G4String El){
   } else if (El == "RingStrips"){
     Elements = fDetector->GetRingStripstList();
     width = fDetector->GetRingStripsWidth();
+  } else if (El == "Resistors"){
+    Elements = fDetector->GetResistorList();
+    width = fDetector->GetResistorWidth();
   } else if (El == "Vessel"){
     Elements.push_back("Vessel");
     width = fDetector->GetVesselWidth();

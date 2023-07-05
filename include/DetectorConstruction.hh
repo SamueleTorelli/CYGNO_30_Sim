@@ -62,6 +62,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* GetGEMVolumesMinus() {return fPhysicGEMsMinus;}
   G4VPhysicalVolume* GetRingsSupportPlus() {return fPhysicRingsSupportPlus;}
   G4VPhysicalVolume* GetRingsSupportMinus() {return fPhysicRingsSupportMinus;}
+  G4VPhysicalVolume* GetResistorsPlus() {return fPhysicResistorsPlus;}
+  G4VPhysicalVolume* GetResistorsMinus() {return fPhysicResistorsMinus;}
   G4VPhysicalVolume* GetRingStripsPlus() {return fPhysicRingStripsPlus;}
   G4VPhysicalVolume* GetRingStripsMinus() {return fPhysicRingStripsMinus;}
   G4VPhysicalVolume* GetVessel() {return fPhysicVessel;} 
@@ -71,6 +73,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4double GetGEMInnerWidth() {return fGEMCoreWidth;}
   G4double GetRingsSupportWidth() {return fRingSupportWidth;}
   G4double GetRingStripsWidth() {return fRingStripWidth;}
+  G4double GetResistorWidth() {return fResistorWidth;}
   G4double GetLensWidth() {return fLensWidth;}
   G4double GetSensorWidth() {return fSensorWidth;}
   G4double GetVesselWidth() {return fVesselWidth;}
@@ -82,6 +85,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   std::vector<G4String> GetGEMsInnerLists() {return fListGEMsCore;}
   std::vector<G4String> GetRingsSupportList() {return fListSupportRings;}
   std::vector<G4String> GetRingStripstList() {return fListRingStrips;}
+  std::vector<G4String> GetResistorList() {return fListResistors;}
   std::vector<G4String> GetLensList() {return fListLens;}
   std::vector<G4String> GetSensorsList() {return fListSensors;}
 
@@ -98,6 +102,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4double fGEMCoreWidth;
   G4double fRingSupportWidth;
   G4double fRingStripWidth;
+  G4double fResistorWidth;
   G4double fLensWidth;
   G4double fSensorWidth;
   G4double fVesselWidth;
@@ -107,6 +112,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   std::vector<G4String> fListGEMsCore;
   std::vector<G4String> fListSupportRings;
   std::vector<G4String> fListRingStrips;
+  std::vector<G4String> fListResistors;
   std::vector<G4String> fListLens;
   std::vector<G4String> fListSensors;
   std::vector<G4String> fListDetector;
@@ -120,6 +126,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* fPhysicRingsSupportMinus;
   G4VPhysicalVolume* fPhysicRingStripsPlus;
   G4VPhysicalVolume* fPhysicRingStripsMinus;
+  G4VPhysicalVolume* fPhysicResistorsMinus;
+  G4VPhysicalVolume* fPhysicResistorsPlus;
   G4VPhysicalVolume* fPhysicVessel;
   G4VPhysicalVolume* fPhysicLensPlus;
   G4VPhysicalVolume* fPhysicLensMinus;
