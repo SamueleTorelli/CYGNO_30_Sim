@@ -34,6 +34,7 @@
 #include "TrackingAction.hh"
 
 #include "G4UIcmdWithABool.hh"
+#include "G4UIcmdWithAnInteger.hh"
 #include "G4UIcommand.hh"
 #include "G4UIparameter.hh"
 
@@ -48,6 +49,16 @@ TrackingMessenger::TrackingMessenger(TrackingAction* trackA)
   fTrackingCmd->SetParameterName("flag",true);
   fTrackingCmd->SetDefaultValue(true);
 
+  fZStopDecay = new G4UIcmdWithAnInteger("/stopChain/ZStopDecay",this);
+  fZStopDecay->SetGuidance("stop decay chain to a ceratin Z and A");
+  fZStopDecay->SetParameterName("flag Z stop decay",true);
+  fZStopDecay->SetDefaultValue(0);
+
+  fAStopDecay = new G4UIcmdWithAnInteger("/stopChain/AStopDecay",this);
+  fAStopDecay->SetGuidance("stop decay chain to a ceratin Z and A");
+  fAStopDecay->SetParameterName("flag A stop decay",true);
+  fAStopDecay->SetDefaultValue(0);
+  
   fTimeWindowCmd = new G4UIcommand("/rdecay01/timeWindow",this);
   fTimeWindowCmd->SetGuidance("set time window to survey activity per nuclide");
   fTimeWindowCmd->SetGuidance("  t1, delta_t");
@@ -74,6 +85,7 @@ TrackingMessenger::TrackingMessenger(TrackingAction* trackA)
   fTimeWindowCmd->SetParameter(unit2Prm);
   //
   fTimeWindowCmd->AvailableForStates(G4State_PreInit,G4State_Idle);  
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -82,6 +94,8 @@ TrackingMessenger::~TrackingMessenger()
 {
   delete fTrackingCmd;
   delete fTimeWindowCmd;
+  //delete fAStopDecay;
+  //delete fZStopDecay;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -89,7 +103,19 @@ TrackingMessenger::~TrackingMessenger()
 void TrackingMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 { 
   if (command == fTrackingCmd)
-    { fTrackingAction->SetFullChain(fTrackingCmd->GetNewBoolValue(newValue));}
+    {
+      fTrackingAction->SetFullChain(fTrackingCmd->GetNewBoolValue(newValue));
+    }
+  
+  if( command == fZStopDecay)
+    {
+      fTrackingAction->SetZStopDecay(fZStopDecay->GetNewIntValue(newValue));
+    }
+
+  if( command == fAStopDecay)
+    {
+      fTrackingAction->SetAStopDecay(fAStopDecay->GetNewIntValue(newValue));
+    }
   
   if (command == fTimeWindowCmd)
     {

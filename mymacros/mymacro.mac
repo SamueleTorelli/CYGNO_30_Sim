@@ -6,10 +6,15 @@
 /output/OutFile GEMs_U235
 
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
-/detector/RadElement GEMs
+/detector/RadElement Cathodes
 
 /isotope/AtomicNumber 92
-/isotope/MassNumber 235
+/isotope/MassNumber 238
+
+/stopChain/ZStopDecay 92
+/stopChain/AStopDecay 234
+
+/run/beamOn 1000
 
 
-/run/beamOn 100000
+

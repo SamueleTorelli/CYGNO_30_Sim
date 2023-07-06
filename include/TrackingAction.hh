@@ -34,6 +34,7 @@
 #define TrackingAction_h 1
 
 #include "G4UserTrackingAction.hh"
+#include "G4GenericMessenger.hh"
 #include "globals.hh"
 
 class EventAction;
@@ -53,17 +54,22 @@ public:
   
   void SetFullChain(G4bool flag) { fFullChain = flag;};
   void SetTimeWindow(G4double , G4double);
+
+  void SetZStopDecay(G4int);
+  void SetAStopDecay(G4int);
   
 private:
   EventAction*        fEvent;
   DetectorConstruction* fDetector;
+
+  TrackingMessenger*  fTrackMessenger; 
+  
   G4double fCharge, fMass;        
   G4bool   fFullChain;
   
-    
-  
   G4double fTime_birth,  fTime_end;
   G4double fTimeWindow1, fTimeWindow2;
+  G4int fStopZIsotope, fStopAIsotope;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

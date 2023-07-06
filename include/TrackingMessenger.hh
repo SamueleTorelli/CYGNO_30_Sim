@@ -38,22 +38,28 @@
 
 class TrackingAction;
 class G4UIcmdWithABool;
+class G4UIcmdWithAnInteger;
 class G4UIcommand;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 class TrackingMessenger: public G4UImessenger
 {
-  public:
-    TrackingMessenger(TrackingAction*);
-   ~TrackingMessenger();
-    
-    virtual void SetNewValue(G4UIcommand*, G4String);
-    
-  private:
-    TrackingAction*   fTrackingAction;    
-    G4UIcmdWithABool* fTrackingCmd;
-    G4UIcommand*      fTimeWindowCmd;
+public:
+  TrackingMessenger(TrackingAction*);
+  ~TrackingMessenger();
+  
+  virtual void SetNewValue(G4UIcommand*, G4String);
+  
+private:
+  TrackingAction*   fTrackingAction;    
+  G4UIcmdWithABool* fTrackingCmd;
+
+  G4UIcmdWithAnInteger* fZStopDecay;
+  G4UIcmdWithAnInteger* fAStopDecay;
+  
+  G4UIcommand*      fTimeWindowCmd;
+  
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

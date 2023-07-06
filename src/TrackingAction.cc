@@ -31,6 +31,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #include "TrackingAction.hh"
+#include "TrackingMessenger.hh"
 
 #include "HistoManager.hh"
 #include "Run.hh"
@@ -50,9 +51,15 @@ TrackingAction::TrackingAction(EventAction* EA,DetectorConstruction* det)
 :G4UserTrackingAction(),
  fEvent(EA),
  fDetector(det),
- fFullChain(true)
+ fTrackMessenger(0),
+ fFullChain(true),
+ fStopZIsotope(0),
+ fStopAIsotope(0)
 {  
+
+  fTrackMessenger = new TrackingMessenger(this);  
   fTimeWindow1 = fTimeWindow2 = 0.;
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -69,12 +76,23 @@ void TrackingAction::SetTimeWindow(G4double t1, G4double dt)
   fTimeWindow2 = fTimeWindow1 + dt;
 }
 
+void TrackingAction::SetZStopDecay(G4int Z)
+{
+  fStopZIsotope=Z;  
+}
+
+void TrackingAction::SetAStopDecay(G4int A)
+{
+  fStopAIsotope=A;  
+}
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
-  Run* run = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
-         
+  
+  Run* run  = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+
   G4ParticleDefinition* particle = track->GetDefinition();
   G4String name   = particle->GetParticleName();
   fCharge = particle->GetPDGCharge();
@@ -118,9 +136,18 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     fDetector->GetSensitiveDetector()->SetLastDecay(name);
     //full chain: put at rest; if not: kill secondary      
     G4Track* tr = (G4Track*) track;
+
     if (fFullChain) {
       tr->SetKineticEnergy(0.);
       tr->SetTrackStatus(fStopButAlive);
+
+      G4int ZPart = tr->GetParticleDefinition()->GetAtomicNumber();
+      G4int APart = tr->GetParticleDefinition()->GetAtomicMass();
+
+      if(ZPart == fStopZIsotope && APart == fStopAIsotope ){
+	tr->SetTrackStatus(fStopAndKill);
+      }
+      
     }
     else if (ID>1) tr->SetTrackStatus(fStopAndKill);
     //
