@@ -8,13 +8,15 @@
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
 /detector/RadElement Cathodes
 
-/isotope/AtomicNumber 92
-/isotope/MassNumber 238
+/isotope/AtomicNumber 90
+/isotope/MassNumber 232
 
-/stopChain/ZStopDecay 92
-/stopChain/AStopDecay 234
+/stopChain/ZStopDecay 90
+/stopChain/AStopDecay 228
 
-/run/beamOn 1000
+/rdecay01/fullChain true
+
+/run/beamOn 1
 
 
 

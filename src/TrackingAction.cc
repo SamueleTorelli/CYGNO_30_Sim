@@ -140,11 +140,13 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     if (fFullChain) {
       tr->SetKineticEnergy(0.);
       tr->SetTrackStatus(fStopButAlive);
-
+      
       G4int ZPart = tr->GetParticleDefinition()->GetAtomicNumber();
       G4int APart = tr->GetParticleDefinition()->GetAtomicMass();
 
-      if(ZPart == fStopZIsotope && APart == fStopAIsotope ){
+      std::cout << name <<" " <<(name.find('[') != std::string::npos) << std::endl;
+      
+      if(ZPart == fStopZIsotope && APart == fStopAIsotope && (name.find('[') == std::string::npos) ){
 	tr->SetTrackStatus(fStopAndKill);
       }
       
