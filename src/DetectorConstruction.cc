@@ -704,7 +704,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 					     );
 	
 	fListResistors.push_back("Resistor_"+std::to_string( (i+13)*1000+(j+10)*10+k+1) );
-	MassMap["Resistor"]+=logicRingStrip->GetMass();  
+	MassMap["Resistors"]+=logicResistor->GetMass();  
 	
 	
       }//chiudo for k 
@@ -747,7 +747,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //PMMA Vessel
   //
 
-  G4double Vesselwidth = 1*cm;
+  G4double Vesselwidth = 0.5*cm;
 
   G4double VesselSize_x_outer = (CathodeSize_x/2 + 12*(+CathodeSize_x + detectorSpace) + 2*Vesselwidth);
   G4double VesselSize_y_outer = (CathodeSize_y/2 + (+CathodeSize_y + detectorSpace) + 2*Vesselwidth);
@@ -777,7 +777,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4LogicalVolume*
     logicVessel = new G4LogicalVolume(solidVessel,
-				      PMMA,
+				      Copper,
 				      "Vessel");
   
   logicVessel->SetVisAttributes(PMMAVisAttributes);

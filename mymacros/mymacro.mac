@@ -3,20 +3,20 @@
 /event/verbose 0
 
 #/random/setSeeds 575223199 8381234975
-/output/OutFile GEMs_U235
+/output/OutFile Vessel_U235
 
 #Elements: Cathodes GEMs Rings Vessel Lens Sensors
-/detector/RadElement Cathodes
+/detector/RadElement Vessel
 
-/isotope/AtomicNumber 90
-/isotope/MassNumber 232
+/isotope/AtomicNumber 92
+/isotope/MassNumber 235
 
-/stopChain/ZStopDecay 90
-/stopChain/AStopDecay 228
+/stopChain/ZStopDecay 0
+/stopChain/AStopDecay 0
 
 /rdecay01/fullChain true
 
-/run/beamOn 1
+/run/beamOn 100
 
 
 
