@@ -546,7 +546,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     for(G4int j=-1;j<2;j++){
       
       fPhysicRingsSupportPlus = new G4PVPlacement(0,
-						  G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),CathodeSize_z/2+GEMDistanceFromCathode/2),
+						  G4ThreeVector(i*(CathodeSize_x+detectorSpace)-RingStripWidth,j*(CathodeSize_y+detectorSpace)-RingStripWidth/2,CathodeSize_z/2+GEMDistanceFromCathode/2),
 						  logicRingSupport,
 						  "RingSupport_"+std::to_string((j+2)*100+(i+12)),
 						  logicWorld,
@@ -564,7 +564,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     for(G4int j=-1;j<2;j++){
       
       fPhysicRingsSupportMinus = new G4PVPlacement(0,
-						   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-1*(CathodeSize_z/2+GEMDistanceFromCathode/2)),
+						   G4ThreeVector(i*(CathodeSize_x+detectorSpace)-RingStripWidth,j*(CathodeSize_y+detectorSpace)-RingStripWidth/2,-1*(CathodeSize_z/2+GEMDistanceFromCathode/2)),
 						  logicRingSupport,
 						  "RingSupport_"+std::to_string((j+6)*100+(i+12)),
 						  logicWorld,
@@ -627,7 +627,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       for(G4int k=-1;k<2;k++){
 	
 	fPhysicRingStripsPlus = new G4PVPlacement(0,
-					     G4ThreeVector(i*(CathodeSize_x+detectorSpace)+RingStripWidth-0.26*RingStripWidth,k*(CathodeSize_y+detectorSpace)+RingStripWidth/2,(j+1)*RingSpacing+0.5*Ring_z+j*Ring_z),
+					     G4ThreeVector(i*(CathodeSize_x+detectorSpace)-0.26*RingStripWidth,k*(CathodeSize_y+detectorSpace),(j+1)*RingSpacing+0.5*Ring_z+j*Ring_z),
 					     logicRingStrip,
 					     "RingStrip_"+std::to_string((i+13)*1000+(j+10)*10+k+1),
 					     logicWorld,
@@ -647,7 +647,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       for(G4int k=-1;k<2;k++){ 
 
 	fPhysicRingStripsMinus = new G4PVPlacement(0,
-					      G4ThreeVector(i*(CathodeSize_x+detectorSpace)+RingStripWidth-0.26*RingStripWidth,k*(CathodeSize_y+detectorSpace)+RingStripWidth/2,-1*((j+1)*RingSpacing+0.5*Ring_z+j*Ring_z)),
+					      G4ThreeVector(i*(CathodeSize_x+detectorSpace)-0.26*RingStripWidth,k*(CathodeSize_y+detectorSpace),-1*((j+1)*RingSpacing+0.5*Ring_z+j*Ring_z)),
 					      logicRingStrip,
 					      "RingStrip_"+std::to_string((i+13)*1000+(j+10)*10+k+4),
 					      logicWorld,
@@ -933,7 +933,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
 
 
-  G4Colour GasColor(0.0,0.0,1.0,0.5);
+  G4Colour GasColor(0.0,0.0,1.0,0.2);
   G4VisAttributes* GasVisAttributes = new G4VisAttributes(GasColor);
   GasVisAttributes->SetForceSolid(true);
   
@@ -952,7 +952,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     for(G4int j=-1;j<2;j++){
       
       G4VPhysicalVolume* GasVolumePlus = new G4PVPlacement(0,
-							   G4ThreeVector(i*(CathodeSize_x+detectorSpace)+RingStripWidth,j*(CathodeSize_y+detectorSpace)+RingStripWidth/2,CathodeSize_z/2+GEMDistanceFromCathode/2),
+							   G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),CathodeSize_z/2+GEMDistanceFromCathode/2),
 							   fLogicalGasVolume,
 							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
@@ -974,7 +974,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     for(G4int j=-1;j<2;j++){
       
       G4VPhysicalVolume* GasVolumeMinus = new G4PVPlacement(0,
-							    G4ThreeVector(i*(CathodeSize_x+detectorSpace)+RingStripWidth,j*(CathodeSize_y+detectorSpace)+RingStripWidth/2,-(CathodeSize_z/2+GEMDistanceFromCathode/2)),
+							    G4ThreeVector(i*(CathodeSize_x+detectorSpace),j*(CathodeSize_y+detectorSpace),-(CathodeSize_z/2+GEMDistanceFromCathode/2)),
 							   fLogicalGasVolume,
 							   "GasVolume_"+std::to_string(counter),
 							   logicWorld,
